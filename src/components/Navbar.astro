@@ -1,0 +1,73 @@
+---
+// Enlaces principales de navegación
+const navLinks = [
+	{ name: 'Inicio', href: '#inicio' },
+	{ name: 'Sobre mí', href: '#sobre-mi' },
+	{ name: 'Proyectos', href: '#proyectos' },
+	{ name: 'Contacto', href: '#contacto' },
+];
+---
+
+<!-- Barra de navegación principal -->
+<header class="sticky top-0 z-50 border-b border-pink-500/20 bg-slate-950">
+	<nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+
+		<!-- Nombre / identidad del portafolio -->
+		<a href="#inicio" class="text-xl font-bold text-white">
+			Ale<span class="text-pink-500">M</span>
+		</a>
+
+		<!-- Enlaces hacia las secciones de la página -->
+		<ul class="hidden items-center gap-8 md:flex">
+			{
+				navLinks.map((link) => (
+					<li>
+						<a
+							href={link.href}
+							class="text-sm text-gray-300 transition-colors hover:text-pink-400"
+						>
+							{link.name}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+
+		<button
+			id="menu-btn"
+			class="text-2xl text-white md:hidden"
+			aria-label="Abrir menú"
+			aria-expanded="false"
+			aria-controls="mobile-menu"
+		>
+			☰
+		</button>
+	</nav>
+
+	<!-- Los mismos enlaces se reutilizan en el menú para pantallas pequeñas -->
+	<ul id="mobile-menu" class="hidden space-y-4 px-6 pb-4 md:hidden">
+		{
+			navLinks.map((link) => (
+				<li>
+					<a
+						href={link.href}
+						class="block text-sm text-gray-300 transition-colors hover:text-pink-400"
+					>
+						{link.name}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</header>
+
+<script>
+	// Controla la apertura del menú móvil y actualiza su estado accesible
+	const btn = document.getElementById('menu-btn');
+	const menu = document.getElementById('mobile-menu');
+
+	btn?.addEventListener('click', () => {
+		const abierto = menu?.classList.toggle('hidden') === false;
+		btn.setAttribute('aria-expanded', String(abierto));
+	});
+</script>

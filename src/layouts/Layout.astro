@@ -1,6 +1,11 @@
 ---
+// Estilos globales disponibles en todo el portafolio
 import '../styles/global.css';
 
+// Navegación compartida entre las páginas del sitio
+import Navbar from '../components/Navbar.astro';
+
+// Propiedades  para personalizar los metadatos de cada página
 interface Props {
 	title?: string;
 	description?: string;
@@ -17,6 +22,8 @@ const {
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Metadatos básicos para descripción e identificación de la página -->
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
 
@@ -27,6 +34,9 @@ const {
 	</head>
 
 	<body>
+
+		<Navbar />
+
 		<slot />
 	</body>
 </html>
