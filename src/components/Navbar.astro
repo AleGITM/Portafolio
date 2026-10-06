@@ -1,5 +1,5 @@
 ---
-// Enlaces principales de navegación
+// Enlaces utilizados para generar la navegación sin repetir el marcado
 const navLinks = [
 	{ name: 'Inicio', href: '#inicio' },
 	{ name: 'Sobre mí', href: '#sobre-mi' },
@@ -8,23 +8,23 @@ const navLinks = [
 ];
 ---
 
-<!-- Barra de navegación principal -->
 <header class="sticky top-0 z-50 border-b border-pink-500/20 bg-slate-950">
 	<nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
 
-		<!-- Nombre / identidad del portafolio -->
-		<a href="#inicio" class="text-xl font-bold text-white">
+		<a
+			href="#inicio"
+			class="font-accent text-2xl text-white transition-colors hover:text-pink-400"
+		>
 			Ale<span class="text-pink-500">M</span>
 		</a>
 
-		<!-- Enlaces hacia las secciones de la página -->
 		<ul class="hidden items-center gap-8 md:flex">
 			{
 				navLinks.map((link) => (
 					<li>
 						<a
 							href={link.href}
-							class="text-sm text-gray-300 transition-colors hover:text-pink-400"
+							class="font-accent text-xl text-gray-300 transition-colors hover:text-pink-400"
 						>
 							{link.name}
 						</a>
@@ -44,14 +44,14 @@ const navLinks = [
 		</button>
 	</nav>
 
-	<!-- Los mismos enlaces se reutilizan en el menú para pantallas pequeñas -->
+	<!-- Reutiliza los mismos enlaces en la navegación para pantallas pequeñas -->
 	<ul id="mobile-menu" class="hidden space-y-4 px-6 pb-4 md:hidden">
 		{
 			navLinks.map((link) => (
 				<li>
 					<a
 						href={link.href}
-						class="block text-sm text-gray-300 transition-colors hover:text-pink-400"
+						class="font-accent block text-xl text-gray-300 transition-colors hover:text-pink-400"
 					>
 						{link.name}
 					</a>
@@ -62,7 +62,7 @@ const navLinks = [
 </header>
 
 <script>
-	// Controla la apertura del menú móvil y actualiza su estado accesible
+	// Controla la apertura del menú móvil y mantiene actualizado su estado accesible
 	const btn = document.getElementById('menu-btn');
 	const menu = document.getElementById('mobile-menu');
 

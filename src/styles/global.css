@@ -1,1 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
 @import "tailwindcss";
+
+/* Tipografía de acento para identidad y elementos destacados */
+.font-accent {
+	font-family: 'Yellowtail', cursive;
+}
