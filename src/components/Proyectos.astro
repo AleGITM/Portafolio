@@ -1,0 +1,268 @@
+<section
+	id="proyectos"
+	class="relative overflow-hidden bg-[#050817] px-6 py-24 sm:py-28"
+>
+	<!-- Iluminación ambiental -->
+	<div
+		class="pointer-events-none absolute -right-40 top-32 h-96 w-96 rounded-full bg-pink-500/10 blur-[130px]"
+	></div>
+
+	<div class="relative z-10 mx-auto max-w-6xl">
+
+		<div class="max-w-3xl">
+			<p class="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-pink-400">
+				Proyectos
+			</p>
+
+			<h2 class="text-4xl font-bold text-white sm:text-5xl">
+				Mis
+				<span
+					class="font-accent ml-2 text-pink-400 [text-shadow:0_0_20px_rgba(255,46,151,0.45)]"
+				>
+					proyectos
+				</span>
+			</h2>
+
+			<p class="mt-6 text-base leading-relaxed text-gray-300 sm:text-lg">
+				Proyectos desarrollados durante mi formación en Ingeniería en Informática.
+			</p>
+		</div>
+
+		<!-- Proyecto destacado con punto de neón que recorre el borde -->
+		<div class="neon-border mt-14">
+			<article class="neon-border-content p-7 sm:p-9 lg:p-10">
+
+				<p
+					class="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300"
+				>
+					Business Intelligence · Proyecto académico
+				</p>
+
+				<h3 class="mt-4 text-2xl font-bold text-white sm:text-3xl">
+					Vulnerabilidad económica de Colchagua
+				</h3>
+
+				<p class="mt-5 max-w-3xl leading-relaxed text-gray-300">
+					En este proyecto analicé la vulnerabilidad económica de las comunas de
+					la provincia de Colchagua frente a distintos factores que pueden afectar
+					la actividad agrícola. Trabajé con datos reales utilizando Python y
+					Power BI para preparar, analizar y modelar la información.
+				</p>
+
+				<!-- Archivos del proyecto -->
+				<div class="mt-10 max-w-3xl">
+					<p
+						class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-gray-500"
+					>
+						Archivos del proyecto
+					</p>
+
+					<div
+						class="flex cursor-not-allowed items-center gap-5 border-b border-white/10 py-5 opacity-45"
+						aria-disabled="true"
+					>
+						<span class="w-14 shrink-0 font-mono text-sm text-pink-400">
+							.ipynb
+						</span>
+
+						<div class="min-w-0 flex-1">
+							<p class="font-medium text-white">
+								Notebook del proyecto
+							</p>
+							<p class="mt-1 text-sm text-gray-500">
+								Análisis, preparación de datos y modelado
+							</p>
+						</div>
+
+						<span class="hidden text-sm text-gray-500 sm:block">
+							No disponible
+						</span>
+					</div>
+
+					<div
+						class="flex cursor-not-allowed items-center gap-5 border-b border-white/10 py-5 opacity-45"
+						aria-disabled="true"
+					>
+						<span class="w-14 shrink-0 font-mono text-sm text-cyan-300">
+							.zip
+						</span>
+
+						<div class="min-w-0 flex-1">
+							<p class="font-medium text-white">
+								Datasets
+							</p>
+							<p class="mt-1 text-sm text-gray-500">
+								Datos utilizados durante el proyecto
+							</p>
+						</div>
+
+						<span class="hidden text-sm text-gray-500 sm:block">
+							No disponible
+						</span>
+					</div>
+
+					<div
+						class="flex cursor-not-allowed items-center gap-5 py-5 opacity-45"
+						aria-disabled="true"
+					>
+						<span class="w-14 shrink-0 font-mono text-sm text-pink-400">
+							.pbix
+						</span>
+
+						<div class="min-w-0 flex-1">
+							<p class="font-medium text-white">
+								Dashboard Power BI
+							</p>
+							<p class="mt-1 text-sm text-gray-500">
+								Archivo para abrir en Power BI Desktop
+							</p>
+						</div>
+
+						<span class="hidden text-sm text-gray-500 sm:block">
+							No disponible
+						</span>
+					</div>
+				</div>
+
+			</article>
+
+			<!-- data-vuelta: segundos que tarda el punto en dar una vuelta completa -->
+			<canvas class="neon-canvas" data-vuelta="6.5" aria-hidden="true"></canvas>
+		</div>
+
+		<!-- Espacio para incorporar proyectos reales posteriormente -->
+		<div class="mt-16">
+			<h3 class="text-2xl font-semibold text-white">
+				Otros proyectos
+			</h3>
+
+			<p class="mt-3 max-w-2xl leading-relaxed text-gray-400">
+				Próximamente agregaré otros proyectos desarrollados durante mi formación.
+			</p>
+		</div>
+
+	</div>
+</section>
+
+<script>
+	// Dibuja un punto de neón con estela que recorre el contorno redondeado de la tarjeta
+	const canvas = document.querySelector('.neon-canvas');
+	const card = canvas ? canvas.parentElement : null;
+	const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	if (canvas && card && !sinMovimiento) {
+		const ctx = canvas.getContext('2d');
+		const PAD = 20; // margen extra del canvas (debe coincidir con el CSS)
+		const RADIO = 16; // igual al border-radius de la tarjeta (1rem)
+		const VUELTA = Number(canvas.dataset.vuelta) * 1000; // milisegundos por vuelta
+		const LARGO_ESTELA = 130; // largo de la estela en píxeles
+		const SEGMENTOS = 70; // tramos en que se divide la estela
+
+		let w = 0;
+		let h = 0;
+		let total = 0;
+
+		// Ajusta el canvas al tamaño actual de la tarjeta (también en pantallas retina)
+		function medir() {
+			const dpr = window.devicePixelRatio || 1;
+			const ancho = card.offsetWidth + PAD * 2;
+			const alto = card.offsetHeight + PAD * 2;
+			canvas.width = ancho * dpr;
+			canvas.height = alto * dpr;
+			canvas.style.width = ancho + 'px';
+			canvas.style.height = alto + 'px';
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+			w = card.offsetWidth - 1;
+			h = card.offsetHeight - 1;
+			total = 2 * (w - 2 * RADIO) + 2 * (h - 2 * RADIO) + 2 * Math.PI * RADIO;
+		}
+
+		// Devuelve la posición [x, y] a una distancia d recorrida sobre el contorno
+		function punto(d) {
+			const r = RADIO;
+			const lado = w - 2 * r;
+			const alto = h - 2 * r;
+			const arco = (Math.PI * r) / 2;
+			d = ((d % total) + total) % total;
+
+			if (d < lado) return [r + d, 0];
+			d -= lado;
+			if (d < arco) {
+				const a = d / r;
+				return [w - r + Math.sin(a) * r, r - Math.cos(a) * r];
+			}
+			d -= arco;
+			if (d < alto) return [w, r + d];
+			d -= alto;
+			if (d < arco) {
+				const a = d / r;
+				return [w - r + Math.cos(a) * r, h - r + Math.sin(a) * r];
+			}
+			d -= arco;
+			if (d < lado) return [w - r - d, h];
+			d -= lado;
+			if (d < arco) {
+				const a = d / r;
+				return [r - Math.sin(a) * r, h - r + Math.cos(a) * r];
+			}
+			d -= arco;
+			if (d < alto) return [0, h - r - d];
+			d -= alto;
+			const a = d / r;
+			return [r - Math.cos(a) * r, r - Math.sin(a) * r];
+		}
+
+		function dibujar(ahora) {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.save();
+			// El contorno queda centrado sobre la línea del borde de la tarjeta
+			ctx.translate(PAD + 0.5, PAD + 0.5);
+
+			const cabeza = ((ahora % VUELTA) / VUELTA) * total;
+			const paso = LARGO_ESTELA / SEGMENTOS;
+			ctx.lineCap = 'butt';
+
+			// Estela: de la cola (invisible) hacia el punto (más fuerte y gruesa)
+			for (let i = SEGMENTOS - 1; i >= 0; i--) {
+				const f = 1 - i / SEGMENTOS; // 1 junto al punto, 0 al final de la cola
+				const [x1, y1] = punto(cabeza - (i + 1) * paso);
+				const [x2, y2] = punto(cabeza - i * paso);
+
+				ctx.beginPath();
+				ctx.moveTo(x1, y1);
+				ctx.lineTo(x2, y2);
+
+				// Halo suave
+				ctx.strokeStyle = `rgba(236, 72, 153, ${f * f * 0.25})`;
+				ctx.lineWidth = 2 + f * 9;
+				ctx.stroke();
+
+				// Núcleo de la estela
+				ctx.strokeStyle = `rgba(255, 110, 190, ${f * f})`;
+				ctx.lineWidth = 0.8 + f * 3.2;
+				ctx.stroke();
+			}
+
+			// Punto principal con brillo
+			const [px, py] = punto(cabeza);
+			ctx.shadowColor = '#ec4899';
+			ctx.shadowBlur = 18;
+			const degradado = ctx.createRadialGradient(px, py, 0, px, py, 8);
+			degradado.addColorStop(0, '#ffffff');
+			degradado.addColorStop(0.45, '#ff8fc8');
+			degradado.addColorStop(1, '#ec4899');
+			ctx.fillStyle = degradado;
+			ctx.beginPath();
+			ctx.arc(px, py, 7, 0, Math.PI * 2);
+			ctx.fill();
+
+			ctx.restore();
+			requestAnimationFrame(dibujar);
+		}
+
+		medir();
+		new ResizeObserver(medir).observe(card);
+		requestAnimationFrame(dibujar);
+	}
+</script>

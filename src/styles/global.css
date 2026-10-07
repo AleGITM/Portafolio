@@ -1,7 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
 @import "tailwindcss";
 
-/* Tipografía de acento para identidad y elementos destacados */
+/* Tipografía de acento reutilizable */
 .font-accent {
 	font-family: 'Yellowtail', cursive;
+}
+
+/* Tarjeta de proyecto con borde base tenue */
+.neon-border {
+	position: relative;
+	border: 1px solid rgba(236, 72, 153, 0.18);
+	border-radius: 1rem;
+	background: #070918;
+}
+
+.neon-border-content {
+	position: relative;
+	border-radius: inherit;
+}
+
+/* Canvas más grande que la tarjeta para que el punto pueda sobresalir del borde */
+.neon-canvas {
+	position: absolute;
+	top: -21px; /* margen extra (20px) + 1px del borde */
+	left: -21px;
+	pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.neon-canvas {
+		display: none;
+	}
 }
