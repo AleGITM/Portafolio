@@ -6,7 +6,7 @@
 	font-family: 'Yellowtail', cursive;
 }
 
-/* Tarjeta de proyecto con borde base tenue */
+/* Tarjeta del proyecto destacado */
 .neon-border {
 	position: relative;
 	border: 1px solid rgba(236, 72, 153, 0.18);
@@ -16,19 +16,36 @@
 
 .neon-border-content {
 	position: relative;
+	z-index: 1;
 	border-radius: inherit;
 }
 
-/* Canvas más grande que la tarjeta para que el punto pueda sobresalir del borde */
-.neon-canvas {
+/* Animación decorativa del borde */
+.neon-animation {
 	position: absolute;
-	top: -21px; /* margen extra (20px) + 1px del borde */
-	left: -21px;
+	inset: -1px;
+	z-index: 2;
+	width: calc(100% + 2px);
+	height: calc(100% + 2px);
+	overflow: visible;
 	pointer-events: none;
 }
 
+.neon-trail {
+	fill: none;
+	stroke: #ec4899;
+	stroke-width: 2;
+	stroke-linecap: round;
+	filter: drop-shadow(0 0 5px rgba(236, 72, 153, 0.7));
+}
+
+.neon-dot {
+	fill: #ec4899;
+	filter: drop-shadow(0 0 7px rgba(236, 72, 153, 0.9));
+}
+
 @media (prefers-reduced-motion: reduce) {
-	.neon-canvas {
+	.neon-animation {
 		display: none;
 	}
 }

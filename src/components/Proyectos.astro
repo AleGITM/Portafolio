@@ -1,268 +1,1305 @@
-<section
-	id="proyectos"
-	class="relative overflow-hidden bg-[#050817] px-6 py-24 sm:py-28"
->
-	<!-- Iluminación ambiental -->
-	<div
-		class="pointer-events-none absolute -right-40 top-32 h-96 w-96 rounded-full bg-pink-500/10 blur-[130px]"
-	></div>
+---
+const fuentes = [
+  { nombre: 'SII', detalle: 'Actividad económica por comuna, 2005–2024.' },
+  { nombre: 'CONAF', detalle: 'Incendios forestales durante 40 temporadas.' },
+  { nombre: 'DGA', detalle: 'Caudales mensuales de cinco estaciones, 2015–2024.' },
+  { nombre: 'ODEPA', detalle: 'Precios mayoristas agrícolas de O’Higgins.' },
+  { nombre: 'ODEPA–CIREN', detalle: 'Catastro Frutícola 2024.' },
+];
 
-	<div class="relative z-10 mx-auto max-w-6xl">
+const archivos = {
+  notebook: '/archivos/colchagua.ipynb',
+  datasets: '/archivos/datasets-colchagua.zip',
+  powerbi: '/archivos/colchagua.pbix',
+  informe: '/archivos/informe-colchagua.pdf',
+};
 
-		<div class="max-w-3xl">
-			<p class="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-pink-400">
-				Proyectos
-			</p>
+const graficos = [
+  {
+    src: '/graficos/incendios_anuales.png',
+    categoria: 'Análisis temporal',
+    titulo: 'Incendios por año',
+    descripcion:
+      'Evolución de la frecuencia de incendios forestales registrados entre 1985 y 2024.',
+    alt: 'Gráfico de incendios forestales por año de término.',
+  },
+  {
+    src: '/graficos/superficie_anual.png',
+    categoria: 'Análisis temporal',
+    titulo: 'Superficie quemada por año',
+    descripcion:
+      'La superficie afectada varía considerablemente entre años, con un máximo destacado en 2017.',
+    alt: 'Gráfico de superficie afectada por incendios según año de término.',
+  },
+  {
+    src: '/graficos/superficie_comunas.png',
+    categoria: 'Comparación territorial',
+    titulo: 'Superficie quemada por comuna',
+    descripcion:
+      'Pumanque registra la mayor superficie quemada acumulada del periodo analizado.',
+    alt: 'Gráfico de superficie quemada acumulada por comuna de Colchagua.',
+  },
+  {
+    src: '/graficos/catastro_fruticola.png',
+    categoria: 'Comparación territorial',
+    titulo: 'Catastro Frutícola 2024',
+    descripcion:
+      'Comparación de indicadores de superficie de cerezos y riego por goteo entre comunas.',
+    alt: 'Gráfico comparativo de indicadores del Catastro Frutícola 2024.',
+  },
+];
 
-			<h2 class="text-4xl font-bold text-white sm:text-5xl">
-				Mis
-				<span
-					class="font-accent ml-2 text-pink-400 [text-shadow:0_0_20px_rgba(255,46,151,0.45)]"
-				>
-					proyectos
-				</span>
-			</h2>
+const cifras = [
+  { valor: '10', etiqueta: 'Comunas analizadas' },
+  { valor: '5', etiqueta: 'Fuentes oficiales' },
+  { valor: '40', etiqueta: 'Temporadas de incendios' },
+  { valor: '3', etiqueta: 'Perfiles comunales' },
+];
+---
 
-			<p class="mt-6 text-base leading-relaxed text-gray-300 sm:text-lg">
-				Proyectos desarrollados durante mi formación en Ingeniería en Informática.
-			</p>
-		</div>
+<section id="proyectos" class="bg-[#050817] px-6 py-20 sm:py-28">
+  <div class="mx-auto max-w-6xl">
 
-		<!-- Proyecto destacado con punto de neón que recorre el borde -->
-		<div class="neon-border mt-14">
-			<article class="neon-border-content p-7 sm:p-9 lg:p-10">
+    <!-- TÍTULO PRINCIPAL -->
+    <header class="max-w-4xl">
+      <h1 class="text-3xl font-bold leading-tight text-white sm:text-5xl">
+        Resiliencia Económica del Territorio Agrícola de
+        {' '}
+        <span
+          class="font-accent text-pink-400 [text-shadow:0_0_20px_rgba(255,46,151,0.35)]"
+        >
+          Colchagua
+        </span>
+      </h1>
+    </header>
 
-				<p
-					class="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300"
-				>
-					Business Intelligence · Proyecto académico
-				</p>
+    <!-- 01: CONTEXTO Y PROBLEMA -->
+    <article class="mt-16 max-w-4xl">
+      <h2 class="text-2xl font-bold text-white sm:text-3xl">
+        Contexto y problema
+      </h2>
 
-				<h3 class="mt-4 text-2xl font-bold text-white sm:text-3xl">
-					Vulnerabilidad económica de Colchagua
-				</h3>
+      <p class="mt-6 text-base leading-8 text-gray-300">
+        La provincia de Colchagua mantiene una importante relación con la
+        actividad agrícola. Esta investigación analiza las diferencias entre
+        sus comunas mediante información económica, agrícola y ambiental,
+        con especial atención a la exposición histórica a incendios forestales.
+      </p>
 
-				<p class="mt-5 max-w-3xl leading-relaxed text-gray-300">
-					En este proyecto analicé la vulnerabilidad económica de las comunas de
-					la provincia de Colchagua frente a distintos factores que pueden afectar
-					la actividad agrícola. Trabajé con datos reales utilizando Python y
-					Power BI para preparar, analizar y modelar la información.
-				</p>
+      <div class="mt-8 border-l-2 border-pink-400/70 pl-5">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-pink-400">
+          Pregunta de investigación
+        </p>
 
-				<!-- Archivos del proyecto -->
-				<div class="mt-10 max-w-3xl">
-					<p
-						class="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-gray-500"
-					>
-						Archivos del proyecto
-					</p>
+        <p class="mt-3 text-lg leading-relaxed text-white">
+          ¿Qué diferencias territoriales pueden identificarse frente a
+          las amenazas que afectan a la actividad agrícola de Colchagua?
+        </p>
+      </div>
+    </article>
 
-					<div
-						class="flex cursor-not-allowed items-center gap-5 border-b border-white/10 py-5 opacity-45"
-						aria-disabled="true"
-					>
-						<span class="w-14 shrink-0 font-mono text-sm text-pink-400">
-							.ipynb
-						</span>
+    <!-- 02: INVESTIGACIÓN Y RESULTADOS -->
+    <section class="mt-24" aria-labelledby="desarrollo-titulo">
+      <h2
+        id="desarrollo-titulo"
+        class="text-2xl font-bold text-white sm:text-3xl"
+      >
+        Investigación, desarrollo y conclusiones
+      </h2>
 
-						<div class="min-w-0 flex-1">
-							<p class="font-medium text-white">
-								Notebook del proyecto
-							</p>
-							<p class="mt-1 text-sm text-gray-500">
-								Análisis, preparación de datos y modelado
-							</p>
-						</div>
+      <p class="mt-4 max-w-3xl leading-7 text-gray-400">
+        Explora las principales etapas de la investigación y sus resultados.
+      </p>
 
-						<span class="hidden text-sm text-gray-500 sm:block">
-							No disponible
-						</span>
-					</div>
+      <div class="colchagua-panel mt-9" data-tabs-root>
+        <nav
+          class="colchagua-tabs"
+          aria-label="Etapas de la investigación"
+          role="tablist"
+        >
+          <button
+            type="button"
+            role="tab"
+            id="etapa-tab-0"
+            aria-controls="etapa-0"
+            aria-selected="true"
+            tabindex="0"
+            data-tab="0"
+            class="is-active"
+          >
+            <span>01</span> Datos y Datamart
+          </button>
 
-					<div
-						class="flex cursor-not-allowed items-center gap-5 border-b border-white/10 py-5 opacity-45"
-						aria-disabled="true"
-					>
-						<span class="w-14 shrink-0 font-mono text-sm text-cyan-300">
-							.zip
-						</span>
+          <button
+            type="button"
+            role="tab"
+            id="etapa-tab-1"
+            aria-controls="etapa-1"
+            aria-selected="false"
+            tabindex="-1"
+            data-tab="1"
+          >
+            <span>02</span> Análisis exploratorio
+          </button>
 
-						<div class="min-w-0 flex-1">
-							<p class="font-medium text-white">
-								Datasets
-							</p>
-							<p class="mt-1 text-sm text-gray-500">
-								Datos utilizados durante el proyecto
-							</p>
-						</div>
+          <button
+            type="button"
+            role="tab"
+            id="etapa-tab-2"
+            aria-controls="etapa-2"
+            aria-selected="false"
+            tabindex="-1"
+            data-tab="2"
+          >
+            <span>03</span> Machine Learning
+          </button>
 
-						<span class="hidden text-sm text-gray-500 sm:block">
-							No disponible
-						</span>
-					</div>
+          <button
+            type="button"
+            role="tab"
+            id="etapa-tab-3"
+            aria-controls="etapa-3"
+            aria-selected="false"
+            tabindex="-1"
+            data-tab="3"
+          >
+            <span>04</span> Forecast
+          </button>
 
-					<div
-						class="flex cursor-not-allowed items-center gap-5 py-5 opacity-45"
-						aria-disabled="true"
-					>
-						<span class="w-14 shrink-0 font-mono text-sm text-pink-400">
-							.pbix
-						</span>
+          <button
+            type="button"
+            role="tab"
+            id="etapa-tab-4"
+            aria-controls="etapa-4"
+            aria-selected="false"
+            tabindex="-1"
+            data-tab="4"
+          >
+            <span>05</span> Power BI
+          </button>
+        </nav>
 
-						<div class="min-w-0 flex-1">
-							<p class="font-medium text-white">
-								Dashboard Power BI
-							</p>
-							<p class="mt-1 text-sm text-gray-500">
-								Archivo para abrir en Power BI Desktop
-							</p>
-						</div>
+        <div class="colchagua-content">
 
-						<span class="hidden text-sm text-gray-500 sm:block">
-							No disponible
-						</span>
-					</div>
-				</div>
+          <!-- DATOS -->
+          <section
+            id="etapa-0"
+            role="tabpanel"
+            aria-labelledby="etapa-tab-0"
+            data-panel="0"
+          >
+            <p class="colchagua-kicker">01 / Preparación de datos</p>
 
-			</article>
+            <h3 class="colchagua-heading">
+              Datos y Datamart
+            </h3>
 
-			<!-- data-vuelta: segundos que tarda el punto en dar una vuelta completa -->
-			<canvas class="neon-canvas" data-vuelta="6.5" aria-hidden="true"></canvas>
-		</div>
+            <p class="colchagua-copy">
+              Se integraron cinco fuentes oficiales mediante Python y
+              procesos ETL. La información se limpió, normalizó y organizó
+              en un Datamart, respetando las diferencias de cobertura
+              temporal y geográfica de cada fuente.
+            </p>
 
-		<!-- Espacio para incorporar proyectos reales posteriormente -->
-		<div class="mt-16">
-			<h3 class="text-2xl font-semibold text-white">
-				Otros proyectos
-			</h3>
+            <h4 class="colchagua-subheading">Fuentes utilizadas</h4>
 
-			<p class="mt-3 max-w-2xl leading-relaxed text-gray-400">
-				Próximamente agregaré otros proyectos desarrollados durante mi formación.
-			</p>
-		</div>
+            <div class="divide-y divide-white/10 border-y border-white/10">
+              {fuentes.map((fuente) => (
+                <div class="grid gap-2 py-3 sm:grid-cols-[145px_1fr] sm:gap-5">
+                  <span class="font-mono text-sm text-cyan-300">
+                    {fuente.nombre}
+                  </span>
 
-	</div>
+                  <p class="text-sm leading-6 text-gray-300">
+                    {fuente.detalle}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div class="colchagua-downloads">
+              <h4 class="colchagua-subheading">Archivos de esta etapa</h4>
+
+              <a class="colchagua-download" href={archivos.datasets} download>
+                <span class="colchagua-extension">.zip</span>
+
+                <span>
+                  <strong>Datasets</strong>
+                  <small>Datos utilizados en la investigación</small>
+                </span>
+
+                <span aria-hidden="true">↗</span>
+              </a>
+
+              <a class="colchagua-download" href={archivos.notebook} download>
+                <span class="colchagua-extension">.ipynb</span>
+
+                <span>
+                  <strong>Notebook de investigación</strong>
+                  <small>ETL, Datamart y análisis</small>
+                </span>
+
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </section>
+
+          <!-- ANÁLISIS EXPLORATORIO -->
+          <section
+            id="etapa-1"
+            role="tabpanel"
+            aria-labelledby="etapa-tab-1"
+            data-panel="1"
+            hidden
+          >
+            <p class="colchagua-kicker">02 / Exploración de datos</p>
+
+            <h3 class="colchagua-heading">
+              Análisis exploratorio
+            </h3>
+
+            <p class="colchagua-copy">
+              Se exploraron los registros de incendios y la información
+              agrícola para identificar patrones, valores extremos y
+              diferencias entre comunas antes de aplicar los modelos analíticos.
+            </p>
+
+            <!-- MINICARRUSEL -->
+            <div
+              class="grafico-carrusel mt-9"
+              data-graficos-root
+              aria-label="Gráficos del análisis exploratorio"
+              aria-roledescription="carrusel"
+            >
+              <div class="grafico-cabecera">
+                <p class="grafico-cabecera-titulo">
+                  Visualizaciones del análisis
+                </p>
+
+                <span
+                  data-grafico-counter
+                  class="font-mono text-xs text-gray-400"
+                >
+                  01 / 04
+                </span>
+              </div>
+
+              <div class="grafico-visor">
+                {graficos.map((grafico, index) => (
+                  <figure
+                    class="grafico-slide"
+                    data-grafico-slide
+                    aria-label={`Gráfico ${index + 1} de ${graficos.length}`}
+                    hidden={index !== 0}
+                  >
+                    <div class="grafico-imagen">
+                      <img
+                        src={grafico.src}
+                        alt={grafico.alt}
+                        loading="lazy"
+                      />
+                    </div>
+
+                    <figcaption class="grafico-descripcion">
+                      <p class="grafico-categoria">
+                        {grafico.categoria}
+                      </p>
+
+                      <h4 class="grafico-titulo">
+                        {grafico.titulo}
+                      </h4>
+
+                      <p class="grafico-texto">
+                        {grafico.descripcion}
+                      </p>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+
+              <div class="grafico-controles">
+                <button
+                  type="button"
+                  class="grafico-boton"
+                  data-grafico-prev
+                  aria-label="Ver gráfico anterior"
+                >
+                  <span aria-hidden="true">←</span>
+                  Anterior
+                </button>
+
+                <div
+                  class="grafico-indicadores"
+                  aria-label="Seleccionar gráfico"
+                >
+                  {graficos.map((grafico, index) => (
+                    <button
+                      type="button"
+                      class:list={[
+                        'grafico-indicador',
+                        { 'is-active': index === 0 },
+                      ]}
+                      data-grafico-dot={index}
+                      aria-label={`Ver gráfico ${index + 1}: ${grafico.titulo}`}
+                      aria-current={index === 0 ? 'true' : undefined}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  class="grafico-boton"
+                  data-grafico-next
+                  aria-label="Ver gráfico siguiente"
+                >
+                  Siguiente
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="colchagua-downloads">
+              <a class="colchagua-download" href={archivos.notebook} download>
+                <span class="colchagua-extension">.ipynb</span>
+
+                <span>
+                  <strong>Ver análisis completo</strong>
+                  <small>Notebook con código y visualizaciones</small>
+                </span>
+
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </section>
+
+          <!-- MACHINE LEARNING -->
+          <section
+            id="etapa-2"
+            role="tabpanel"
+            aria-labelledby="etapa-tab-2"
+            data-panel="2"
+            hidden
+          >
+            <p class="colchagua-kicker">03 / Agrupamiento territorial</p>
+
+            <h3 class="colchagua-heading">
+              Machine Learning
+            </h3>
+
+            <p class="colchagua-copy">
+              Se aplicó clustering jerárquico para identificar similitudes
+              entre las diez comunas. Se obtuvieron tres perfiles
+              territoriales con un coeficiente silhouette de 0,314.
+              Son agrupaciones exploratorias, no un ranking definitivo
+              de vulnerabilidad.
+            </p>
+
+            <h4 class="colchagua-subheading">
+              Perfiles identificados
+            </h4>
+
+            <div class="perfiles-lista">
+              <div class="perfil-fila">
+                <span class="perfil-numero">01</span>
+
+                <div>
+                  <h4>Chimbarongo y San Fernando</h4>
+                  <p>
+                    Mayor superficie de cerezos y frecuencia histórica
+                    de incendios.
+                  </p>
+                </div>
+              </div>
+
+              <div class="perfil-fila">
+                <span class="perfil-numero">02</span>
+
+                <div>
+                  <h4>Chépica, Nancagua, Palmilla y Placilla</h4>
+                  <p>
+                    Mayor dependencia relativa del empleo agrícola
+                    y menor exposición histórica a incendios.
+                  </p>
+                </div>
+              </div>
+
+              <div class="perfil-fila">
+                <span class="perfil-numero">03</span>
+
+                <div>
+                  <h4>Lolol, Peralillo, Pumanque y Santa Cruz</h4>
+                  <p>
+                    Mayor superficie quemada acumulada y menor
+                    peso relativo del empleo agrícola.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="colchagua-downloads">
+              <a class="colchagua-download" href={archivos.notebook} download>
+                <span class="colchagua-extension">.ipynb</span>
+
+                <span>
+                  <strong>Ver modelo completo</strong>
+                  <small>Clustering y evaluación</small>
+                </span>
+
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </section>
+
+          <!-- FORECAST -->
+          <section
+            id="etapa-3"
+            role="tabpanel"
+            aria-labelledby="etapa-tab-3"
+            data-panel="3"
+            hidden
+          >
+            <p class="colchagua-kicker">04 / Pronóstico temporal</p>
+
+            <h3 class="colchagua-heading">
+              Forecast
+            </h3>
+
+            <p class="colchagua-copy">
+              Se compararon tres métodos para pronosticar incendios
+              forestales por temporada. La persistencia obtuvo el menor
+              error en la evaluación y se utilizó para proyectar
+              80 incendios por temporada durante los tres periodos siguientes.
+            </p>
+
+            <h4 class="colchagua-subheading">
+              Comparación de modelos
+            </h4>
+
+            <div class="overflow-x-auto border-y border-white/10">
+              <table class="w-full border-collapse text-left text-sm">
+                <thead>
+                  <tr class="border-b border-white/10 text-xs uppercase tracking-wider text-cyan-300">
+                    <th class="py-4 pr-5 font-medium">Modelo</th>
+                    <th class="py-4 font-medium">MAE</th>
+                  </tr>
+                </thead>
+
+                <tbody class="text-gray-300">
+                  <tr class="border-b border-white/10">
+                    <td class="py-4 pr-5 text-white">
+                      Persistencia
+                    </td>
+
+                    <td class="py-4 font-mono text-pink-400">
+                      17,33
+                    </td>
+                  </tr>
+
+                  <tr class="border-b border-white/10">
+                    <td class="py-4 pr-5">Promedio histórico</td>
+                    <td class="py-4 font-mono">19,18</td>
+                  </tr>
+
+                  <tr>
+                    <td class="py-4 pr-5">Holt</td>
+                    <td class="py-4 font-mono">28,51</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="mt-8 border-l-2 border-cyan-300/50 pl-5">
+              <p class="font-mono text-4xl text-white">80</p>
+
+              <p class="mt-2 text-sm text-gray-300">
+                Incendios proyectados por temporada:
+                2024–25, 2025–26 y 2026–27.
+              </p>
+
+              <p class="mt-3 text-sm leading-7 text-gray-400">
+                Proyección exploratoria basada en el último valor observado,
+                sin incorporar variables climáticas.
+              </p>
+            </div>
+
+            <div class="colchagua-downloads">
+              <a class="colchagua-download" href={archivos.notebook} download>
+                <span class="colchagua-extension">.ipynb</span>
+
+                <span>
+                  <strong>Ver pronóstico completo</strong>
+                  <small>Modelos y evaluación</small>
+                </span>
+
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </section>
+
+          <!-- POWER BI Y CONCLUSIONES -->
+          <section
+            id="etapa-4"
+            role="tabpanel"
+            aria-labelledby="etapa-tab-4"
+            data-panel="4"
+            hidden
+          >
+            <p class="colchagua-kicker">05 / Visualización y resultados</p>
+
+            <h3 class="colchagua-heading">
+              Power BI y conclusiones
+            </h3>
+
+            <p class="colchagua-copy">
+              Se desarrolló un dashboard para visualizar los indicadores
+              económicos, agrícolas y ambientales de Colchagua y facilitar
+              la comparación territorial.
+            </p>
+
+            <figure class="mt-8 overflow-hidden border border-white/10 bg-[#0a1020]">
+              <img
+                src="/imagenes/dashboard-colchagua.png"
+                alt="Dashboard de Power BI sobre Colchagua"
+                class="h-auto w-full"
+                loading="lazy"
+              />
+
+              <figcaption class="border-t border-white/10 px-4 py-3 text-xs text-gray-400">
+                Dashboard desarrollado en Power BI Desktop.
+              </figcaption>
+            </figure>
+
+            <h4 class="colchagua-subheading">
+              Principales conclusiones
+            </h4>
+
+            <div class="conclusiones-lista">
+              <p>
+                <span>01</span>
+                San Fernando registra la mayor frecuencia histórica de
+                incendios, mientras que Pumanque presenta la mayor
+                superficie quemada.
+              </p>
+
+              <p>
+                <span>02</span>
+                Las comunas presentan perfiles agrícolas y ambientales
+                diferentes, por lo que no es adecuado evaluarlas
+                mediante un único indicador.
+              </p>
+
+              <p>
+                <span>03</span>
+                Los resultados sirven como base descriptiva para apoyar
+                decisiones territoriales, pero no demuestran causalidad
+                ni cuantifican directamente pérdidas económicas de las PYMEs.
+              </p>
+            </div>
+
+            <div class="colchagua-downloads">
+              <h4 class="colchagua-subheading">
+                Archivos del proyecto
+              </h4>
+
+              <a class="colchagua-download" href={archivos.powerbi} download>
+                <span class="colchagua-extension">.pbix</span>
+
+                <span>
+                  <strong>Dashboard Power BI</strong>
+                  <small>Archivo para Power BI Desktop</small>
+                </span>
+
+                <span aria-hidden="true">↗</span>
+              </a>
+
+              <a class="colchagua-download" href={archivos.informe} download>
+                <span class="colchagua-extension">.pdf</span>
+
+                <span>
+                  <strong>Informe de investigación</strong>
+                  <small>Metodología y resultados completos</small>
+                </span>
+
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </section>
+
+        </div>
+
+        <div class="colchagua-controls">
+          <span
+            data-counter
+            class="font-mono text-xs text-gray-500"
+          >
+            01 / 05
+          </span>
+
+          <div class="flex gap-5">
+            <button
+              type="button"
+              data-prev
+              aria-label="Etapa anterior"
+              class="colchagua-arrow"
+            >
+              ←
+            </button>
+
+            <button
+              type="button"
+              data-next
+              aria-label="Etapa siguiente"
+              class="colchagua-arrow"
+            >
+              →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03: INVESTIGACIÓN EN CIFRAS -->
+    <section class="mt-24" aria-labelledby="cifras-titulo">
+      <h2
+        id="cifras-titulo"
+        class="text-2xl font-bold text-white sm:text-3xl"
+      >
+        La investigación en cifras
+      </h2>
+
+      <p class="mt-4 max-w-3xl leading-7 text-gray-400">
+        Una síntesis del alcance y los principales hallazgos del estudio.
+      </p>
+
+      <div class="cifras-grid mt-9">
+        {cifras.map((cifra) => (
+          <div class="cifra-item">
+            <p class="font-mono text-4xl text-pink-400 sm:text-5xl">
+              {cifra.valor}
+            </p>
+
+            <p class="mt-3 text-sm text-gray-300">
+              {cifra.etiqueta}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-9 max-w-4xl border-l-2 border-cyan-300/60 pl-5">
+        <p class="text-sm font-medium text-cyan-300">
+          Hallazgo destacado
+        </p>
+
+        <p class="mt-3 leading-8 text-gray-300">
+          San Fernando acumuló <strong class="text-white">1.056 incendios</strong>,
+          mientras que Pumanque registró aproximadamente
+          <strong class="text-white">57.774 hectáreas quemadas</strong>.
+          La frecuencia y la superficie afectada representan
+          dimensiones distintas de exposición territorial.
+        </p>
+      </div>
+    </section>
+
+  </div>
 </section>
 
+<style>
+  .colchagua-panel {
+    position: relative;
+    background: #050817;
+    border-top: 1px solid rgba(103, 232, 249, 0.25);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+  }
+
+  .colchagua-panel::before,
+  .colchagua-panel::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+  }
+
+  .colchagua-panel::before {
+    top: -1px;
+    left: 0;
+    border-top: 2px solid #ec4899;
+    border-left: 2px solid #ec4899;
+  }
+
+  .colchagua-panel::after {
+    right: 0;
+    bottom: -1px;
+    border-right: 2px solid rgba(103, 232, 249, 0.75);
+    border-bottom: 2px solid rgba(103, 232, 249, 0.75);
+  }
+
+  .colchagua-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.75rem;
+    padding: 1.5rem 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .colchagua-tabs button {
+    position: relative;
+    padding: 0 0 1.15rem;
+    color: #94a3b8;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    text-align: left;
+    cursor: pointer;
+    transition: color 180ms ease;
+  }
+
+  .colchagua-tabs button span {
+    margin-right: 0.4rem;
+    color: #64748b;
+    font-family: monospace;
+  }
+
+  .colchagua-tabs button:hover,
+  .colchagua-tabs button.is-active {
+    color: #f9a8d4;
+  }
+
+  .colchagua-tabs button.is-active::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    background: #ec4899;
+  }
+
+  .colchagua-content {
+    padding: 2rem 1.5rem 2.5rem;
+  }
+
+  .colchagua-kicker {
+    margin-bottom: 0.8rem;
+    color: #67e8f9;
+    font-family: monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .colchagua-heading {
+    margin-bottom: 1.5rem;
+    color: #fff;
+    font-size: clamp(1.45rem, 3vw, 2rem);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .colchagua-copy {
+    max-width: 56rem;
+    color: #d1d5db;
+    line-height: 1.85;
+  }
+
+  .colchagua-subheading {
+    margin: 2rem 0 1rem;
+    color: #f9a8d4;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  /* MINICARRUSEL DE GRÁFICOS */
+  .grafico-carrusel {
+    overflow: hidden;
+    border: 1px solid rgba(103, 232, 249, 0.22);
+    background: #080e20;
+  }
+
+  .grafico-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .grafico-cabecera-titulo {
+    color: #f9a8d4;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  .grafico-visor {
+    padding: 1.25rem;
+    touch-action: pan-y;
+  }
+
+  .grafico-slide[hidden] {
+    display: none !important;
+  }
+
+  .grafico-slide {
+    margin: 0;
+  }
+
+  .grafico-imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .grafico-imagen img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .grafico-descripcion {
+    padding: 1.25rem 0 0.35rem;
+  }
+
+  .grafico-categoria {
+    margin-bottom: 0.4rem;
+    color: #67e8f9;
+    font-family: monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .grafico-titulo {
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+
+  .grafico-texto {
+    margin-top: 0.5rem;
+    max-width: 48rem;
+    color: #9ca3af;
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+
+  .grafico-controles {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 0 1.25rem;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .grafico-boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 36px;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    border-radius: 999px;
+    color: #d1d5db;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: border-color 180ms ease, color 180ms ease;
+  }
+
+  .grafico-boton:hover {
+    border-color: #ec4899;
+    color: #f9a8d4;
+  }
+
+  .grafico-boton span {
+    color: #67e8f9;
+    font-size: 1rem;
+  }
+
+  .grafico-indicadores {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+  }
+
+  .grafico-indicador {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: #64748b;
+    cursor: pointer;
+    transition: width 180ms ease, background-color 180ms ease;
+  }
+
+  .grafico-indicador.is-active {
+    width: 24px;
+    background: #67e8f9;
+  }
+
+  /* PERFILES */
+  .perfiles-lista {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .perfil-fila {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .perfil-numero {
+    color: #f472b6;
+    font-family: monospace;
+    font-size: 0.85rem;
+  }
+
+  .perfil-fila h4 {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .perfil-fila p {
+    margin-top: 0.35rem;
+    color: #9ca3af;
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+
+  /* CONCLUSIONES */
+  .conclusiones-lista {
+    max-width: 56rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .conclusiones-lista p {
+    display: flex;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #d1d5db;
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+
+  .conclusiones-lista span {
+    flex-shrink: 0;
+    color: #f472b6;
+    font-family: monospace;
+  }
+
+  /* CIFRAS */
+  .cifras-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 1.5rem;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(103, 232, 249, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .cifra-item {
+    min-width: 0;
+  }
+
+  /* DESCARGAS */
+  .colchagua-downloads {
+    margin-top: 2.5rem;
+    max-width: 48rem;
+  }
+
+  .colchagua-download {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+    transition: border-color 180ms ease, color 180ms ease;
+  }
+
+  .colchagua-download:hover {
+    border-color: rgba(236, 72, 153, 0.6);
+  }
+
+  .colchagua-extension {
+    flex-shrink: 0;
+    width: 3.75rem;
+    color: #f472b6;
+    font-family: monospace;
+    font-size: 0.82rem;
+  }
+
+  .colchagua-download strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .colchagua-download small {
+    display: block;
+    margin-top: 0.25rem;
+    color: #9ca3af;
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  .colchagua-download > span:last-child {
+    margin-left: auto;
+    color: #67e8f9;
+  }
+
+  /* CONTROLES DEL CARRUSEL PRINCIPAL */
+  .colchagua-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .colchagua-arrow {
+    padding: 0.35rem;
+    color: #94a3b8;
+    font-family: monospace;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: color 180ms ease;
+  }
+
+  .colchagua-arrow:hover {
+    color: #f472b6;
+  }
+
+  [data-panel][hidden] {
+    display: none !important;
+  }
+
+  @media (min-width: 640px) {
+    .colchagua-tabs {
+      padding-right: 2.5rem;
+      padding-left: 2.5rem;
+    }
+
+    .colchagua-content {
+      padding: 2.5rem;
+    }
+
+    .colchagua-controls {
+      padding-right: 2.5rem;
+      padding-left: 2.5rem;
+    }
+
+    .cifras-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 639px) {
+    .grafico-cabecera {
+      padding: 0.85rem;
+    }
+
+    .grafico-visor {
+      padding: 0.75rem;
+    }
+
+    .grafico-controles {
+      margin: 0 0.75rem;
+    }
+
+    .grafico-boton {
+      gap: 0.3rem;
+      padding: 0.4rem 0.55rem;
+      font-size: 0.72rem;
+    }
+
+    .grafico-indicadores {
+      gap: 0.35rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .colchagua-tabs button,
+    .colchagua-download,
+    .colchagua-arrow,
+    .grafico-boton,
+    .grafico-indicador {
+      transition: none;
+    }
+  }
+</style>
+
 <script>
-	// Dibuja un punto de neón con estela que recorre el contorno redondeado de la tarjeta
-	const canvas = document.querySelector('.neon-canvas');
-	const card = canvas ? canvas.parentElement : null;
-	const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function iniciarCarruseles() {
+    document.querySelectorAll<HTMLElement>('[data-tabs-root]').forEach((root) => {
+      if (root.dataset.initialized === 'true') return;
 
-	if (canvas && card && !sinMovimiento) {
-		const ctx = canvas.getContext('2d');
-		const PAD = 20; // margen extra del canvas (debe coincidir con el CSS)
-		const RADIO = 16; // igual al border-radius de la tarjeta (1rem)
-		const VUELTA = Number(canvas.dataset.vuelta) * 1000; // milisegundos por vuelta
-		const LARGO_ESTELA = 130; // largo de la estela en píxeles
-		const SEGMENTOS = 70; // tramos en que se divide la estela
+      root.dataset.initialized = 'true';
 
-		let w = 0;
-		let h = 0;
-		let total = 0;
+      const tabs = Array.from(
+        root.querySelectorAll<HTMLButtonElement>('[data-tab]')
+      );
 
-		// Ajusta el canvas al tamaño actual de la tarjeta (también en pantallas retina)
-		function medir() {
-			const dpr = window.devicePixelRatio || 1;
-			const ancho = card.offsetWidth + PAD * 2;
-			const alto = card.offsetHeight + PAD * 2;
-			canvas.width = ancho * dpr;
-			canvas.height = alto * dpr;
-			canvas.style.width = ancho + 'px';
-			canvas.style.height = alto + 'px';
-			ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const panels = Array.from(
+        root.querySelectorAll<HTMLElement>('[data-panel]')
+      );
 
-			w = card.offsetWidth - 1;
-			h = card.offsetHeight - 1;
-			total = 2 * (w - 2 * RADIO) + 2 * (h - 2 * RADIO) + 2 * Math.PI * RADIO;
-		}
+      const counter = root.querySelector<HTMLElement>('[data-counter]');
+      const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
+      const next = root.querySelector<HTMLButtonElement>('[data-next]');
 
-		// Devuelve la posición [x, y] a una distancia d recorrida sobre el contorno
-		function punto(d) {
-			const r = RADIO;
-			const lado = w - 2 * r;
-			const alto = h - 2 * r;
-			const arco = (Math.PI * r) / 2;
-			d = ((d % total) + total) % total;
+      if (!tabs.length || tabs.length !== panels.length) return;
 
-			if (d < lado) return [r + d, 0];
-			d -= lado;
-			if (d < arco) {
-				const a = d / r;
-				return [w - r + Math.sin(a) * r, r - Math.cos(a) * r];
-			}
-			d -= arco;
-			if (d < alto) return [w, r + d];
-			d -= alto;
-			if (d < arco) {
-				const a = d / r;
-				return [w - r + Math.cos(a) * r, h - r + Math.sin(a) * r];
-			}
-			d -= arco;
-			if (d < lado) return [w - r - d, h];
-			d -= lado;
-			if (d < arco) {
-				const a = d / r;
-				return [r - Math.sin(a) * r, h - r + Math.cos(a) * r];
-			}
-			d -= arco;
-			if (d < alto) return [0, h - r - d];
-			d -= alto;
-			const a = d / r;
-			return [r - Math.cos(a) * r, r - Math.sin(a) * r];
-		}
+      let current = 0;
 
-		function dibujar(ahora) {
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			ctx.save();
-			// El contorno queda centrado sobre la línea del borde de la tarjeta
-			ctx.translate(PAD + 0.5, PAD + 0.5);
+      function mostrar(index: number, focusTab = false) {
+        current = (index + tabs.length) % tabs.length;
 
-			const cabeza = ((ahora % VUELTA) / VUELTA) * total;
-			const paso = LARGO_ESTELA / SEGMENTOS;
-			ctx.lineCap = 'butt';
+        tabs.forEach((tab, i) => {
+          const active = i === current;
 
-			// Estela: de la cola (invisible) hacia el punto (más fuerte y gruesa)
-			for (let i = SEGMENTOS - 1; i >= 0; i--) {
-				const f = 1 - i / SEGMENTOS; // 1 junto al punto, 0 al final de la cola
-				const [x1, y1] = punto(cabeza - (i + 1) * paso);
-				const [x2, y2] = punto(cabeza - i * paso);
+          tab.classList.toggle('is-active', active);
+          tab.setAttribute('aria-selected', String(active));
+          tab.tabIndex = active ? 0 : -1;
 
-				ctx.beginPath();
-				ctx.moveTo(x1, y1);
-				ctx.lineTo(x2, y2);
+          if (active && focusTab) tab.focus();
+        });
 
-				// Halo suave
-				ctx.strokeStyle = `rgba(236, 72, 153, ${f * f * 0.25})`;
-				ctx.lineWidth = 2 + f * 9;
-				ctx.stroke();
+        panels.forEach((panel, i) => {
+          panel.hidden = i !== current;
+        });
 
-				// Núcleo de la estela
-				ctx.strokeStyle = `rgba(255, 110, 190, ${f * f})`;
-				ctx.lineWidth = 0.8 + f * 3.2;
-				ctx.stroke();
-			}
+        if (counter) {
+          counter.textContent =
+            `${String(current + 1).padStart(2, '0')} / ${String(tabs.length).padStart(2, '0')}`;
+        }
+      }
 
-			// Punto principal con brillo
-			const [px, py] = punto(cabeza);
-			ctx.shadowColor = '#ec4899';
-			ctx.shadowBlur = 18;
-			const degradado = ctx.createRadialGradient(px, py, 0, px, py, 8);
-			degradado.addColorStop(0, '#ffffff');
-			degradado.addColorStop(0.45, '#ff8fc8');
-			degradado.addColorStop(1, '#ec4899');
-			ctx.fillStyle = degradado;
-			ctx.beginPath();
-			ctx.arc(px, py, 7, 0, Math.PI * 2);
-			ctx.fill();
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => mostrar(index));
 
-			ctx.restore();
-			requestAnimationFrame(dibujar);
-		}
+        tab.addEventListener('keydown', (event) => {
+          if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            mostrar(current + 1, true);
+          } else if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            mostrar(current - 1, true);
+          } else if (event.key === 'Home') {
+            event.preventDefault();
+            mostrar(0, true);
+          } else if (event.key === 'End') {
+            event.preventDefault();
+            mostrar(tabs.length - 1, true);
+          }
+        });
+      });
 
-		medir();
-		new ResizeObserver(medir).observe(card);
-		requestAnimationFrame(dibujar);
-	}
+      prev?.addEventListener('click', () => mostrar(current - 1));
+      next?.addEventListener('click', () => mostrar(current + 1));
+
+      mostrar(0);
+    });
+  }
+
+  function iniciarCarruselGraficos() {
+    document.querySelectorAll<HTMLElement>('[data-graficos-root]').forEach((root) => {
+      if (root.dataset.initialized === 'true') return;
+
+      root.dataset.initialized = 'true';
+
+      const slides = Array.from(
+        root.querySelectorAll<HTMLElement>('[data-grafico-slide]')
+      );
+
+      const dots = Array.from(
+        root.querySelectorAll<HTMLButtonElement>('[data-grafico-dot]')
+      );
+
+      const counter = root.querySelector<HTMLElement>('[data-grafico-counter]');
+      const prev = root.querySelector<HTMLButtonElement>('[data-grafico-prev]');
+      const next = root.querySelector<HTMLButtonElement>('[data-grafico-next]');
+      const visor = root.querySelector<HTMLElement>('.grafico-visor');
+
+      if (!slides.length) return;
+
+      let current = 0;
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      function mostrar(index: number) {
+        current = (index + slides.length) % slides.length;
+
+        slides.forEach((slide, i) => {
+          slide.hidden = i !== current;
+        });
+
+        dots.forEach((dot, i) => {
+          const active = i === current;
+          dot.classList.toggle('is-active', active);
+
+          if (active) {
+            dot.setAttribute('aria-current', 'true');
+          } else {
+            dot.removeAttribute('aria-current');
+          }
+        });
+
+        if (counter) {
+          counter.textContent =
+            `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+        }
+      }
+
+      prev?.addEventListener('click', () => mostrar(current - 1));
+      next?.addEventListener('click', () => mostrar(current + 1));
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => mostrar(index));
+      });
+
+      visor?.addEventListener(
+        'touchstart',
+        (event) => {
+          touchStartX = event.changedTouches[0].screenX;
+          touchStartY = event.changedTouches[0].screenY;
+        },
+        { passive: true }
+      );
+
+      visor?.addEventListener(
+        'touchend',
+        (event) => {
+          const diffX = event.changedTouches[0].screenX - touchStartX;
+          const diffY = event.changedTouches[0].screenY - touchStartY;
+
+          if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+            mostrar(current + (diffX < 0 ? 1 : -1));
+          }
+        },
+        { passive: true }
+      );
+
+      mostrar(0);
+    });
+  }
+
+  function iniciarInteracciones() {
+    iniciarCarruseles();
+    iniciarCarruselGraficos();
+  }
+
+  iniciarInteracciones();
+  document.addEventListener('astro:page-load', iniciarInteracciones);
 </script>
