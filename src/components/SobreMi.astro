@@ -10,15 +10,12 @@ const lenguajes = [
 
 <section
   id="sobre-mi"
-  class="bg-[#02030a] px-6 py-24 sm:py-28"
+  class="sobre-mi-section bg-[#02030a] px-6 py-20 sm:py-24"
 >
   <div class="mx-auto max-w-6xl">
 
-    <!-- Presentación profesional -->
-    <div class="max-w-3xl">
-      <p class="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-pink-400">
-      </p>
-
+    <!-- PRESENTACIÓN -->
+    <div class="presentacion">
       <h2 class="text-4xl font-bold text-white sm:text-5xl">
         Sobre
         <span
@@ -43,34 +40,737 @@ const lenguajes = [
       </div>
     </div>
 
-    <!-- Lenguajes y tecnologías -->
-    <div class="mt-12 max-w-3xl">
-      <h3 class="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
-       Tecnologías
-      </h3>
+    <!-- TECNOLOGÍAS Y GLITCH -->
+    <div class="contenido-inferior">
 
-      <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {lenguajes.map((lenguaje) => (
-          <div
-            class="flex min-h-28 flex-col items-center justify-center gap-3 rounded-xl border border-pink-500/20 bg-white/[0.03] p-4 transition-colors duration-200 hover:border-pink-400/60 hover:bg-white/[0.05]"
-          >
-            <img
-              src={lenguaje.icono}
-              alt=""
-              aria-hidden="true"
-              width="42"
-              height="42"
-              loading="lazy"
-              class="h-10 w-10 object-contain"
-            />
+      <div class="tecnologias-bloque">
+        <h3 class="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
+          Tecnologías
+        </h3>
 
-            <span class="text-center text-sm font-medium text-gray-200">
-              {lenguaje.nombre}
-            </span>
-          </div>
-        ))}
+        <div class="tecnologias-lista">
+          {lenguajes.map((lenguaje) => (
+            <div class="tecnologia-tarjeta">
+
+              <!-- LUZ SINCRONIZADA -->
+              <svg
+                class="borde-animado"
+                aria-hidden="true"
+              >
+                <rect
+                  class="borde-luz"
+                  x="2"
+                  y="2"
+                  rx="12"
+                  ry="12"
+                />
+              </svg>
+
+              <img
+                src={lenguaje.icono}
+                alt=""
+                aria-hidden="true"
+                width="42"
+                height="42"
+                loading="lazy"
+                class="h-10 w-10 object-contain"
+              />
+
+              <span class="text-base font-medium text-gray-200">
+                {lenguaje.nombre}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
 
+      <!-- GLITCH DE CUADRADOS -->
+      <div
+        class="glitch-campo"
+        data-glitch-campo
+        role="img"
+        aria-label="Campo digital interactivo de píxeles neón"
+      >
+        <canvas class="glitch-canvas" aria-hidden="true"></canvas>
+      </div>
+
+    </div>
   </div>
 </section>
+
+<style>
+  .sobre-mi-section {
+    min-height: calc(100vh - 75px);
+    overflow: hidden;
+  }
+
+  .presentacion {
+    max-width: 750px;
+  }
+
+  .contenido-inferior {
+    display: grid;
+    grid-template-columns: minmax(260px, 350px) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 5rem);
+    margin-top: 3.5rem;
+  }
+
+  /* TECNOLOGÍAS */
+
+  .tecnologias-lista {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .tecnologia-tarjeta {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    min-height: 76px;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(236, 72, 153, 0.2);
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.025);
+    isolation: isolate;
+  }
+
+  .tecnologia-tarjeta > img,
+  .tecnologia-tarjeta > span {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* BORDES LUMINOSOS */
+
+  .borde-animado {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .borde-luz {
+    fill: none;
+    stroke: #ff4eac;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+    filter:
+      drop-shadow(0 0 4px #ff2e97)
+      drop-shadow(0 0 8px rgba(255, 46, 151, 0.65));
+  }
+
+  .tecnologia-tarjeta:nth-child(even) .borde-luz {
+    stroke: #67e8f9;
+    filter:
+      drop-shadow(0 0 4px #22d3ee)
+      drop-shadow(0 0 8px rgba(34, 211, 238, 0.65));
+  }
+
+  /* CAMPO GLITCH */
+
+  .glitch-campo {
+    position: relative;
+    width: 100%;
+    height: 390px;
+    min-width: 0;
+    overflow: hidden;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+
+    /* OCULTAR COMPLETAMENTE EL CURSOR */
+    cursor: none;
+
+    /* PERMITIR ARRASTRAR SOBRE EL GLITCH EN MÓVIL */
+    touch-action: none;
+  }
+
+  .glitch-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: none;
+    pointer-events: none;
+  }
+
+  /* RESPONSIVE */
+
+  @media (max-width: 850px) {
+    .contenido-inferior {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .tecnologias-lista {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .glitch-campo {
+      height: 320px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .tecnologia-tarjeta {
+      min-height: 70px;
+      gap: 0.7rem;
+      padding: 0.8rem;
+    }
+
+    .tecnologia-tarjeta img {
+      width: 34px;
+      height: 34px;
+    }
+
+    .tecnologia-tarjeta span {
+      font-size: 0.85rem;
+    }
+
+    .glitch-campo {
+      height: 260px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .borde-luz {
+      opacity: 0.45;
+    }
+  }
+</style>
+
+<script>
+  /* ==========================================
+     BORDES: UN SOLO RELOJ PARA LAS 4 LUCES
+     ========================================== */
+
+  function iniciarBordesAnimados() {
+    const tarjetas = Array.from(
+      document.querySelectorAll<HTMLElement>('.tecnologia-tarjeta')
+    );
+
+    if (!tarjetas.length) return;
+
+    if (tarjetas[0].dataset.bordeIniciado === 'true') return;
+
+    const movimientoReducido = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    type Borde = {
+      tarjeta: HTMLElement;
+      rect: SVGRectElement;
+      perimetro: number;
+    };
+
+    const bordes: Borde[] = [];
+
+    tarjetas.forEach((tarjeta) => {
+      const rect = tarjeta.querySelector<SVGRectElement>(
+        '.borde-luz'
+      );
+
+      if (!rect) return;
+
+      tarjeta.dataset.bordeIniciado = 'true';
+
+      bordes.push({
+        tarjeta,
+        rect,
+        perimetro: 0,
+      });
+    });
+
+    if (!bordes.length) return;
+
+    const DURACION = 5000;
+    const SEGMENTO = 48;
+
+    let frameId = 0;
+    let destruido = false;
+
+    const inicio = performance.now();
+
+    function ajustarBordes() {
+      bordes.forEach((borde) => {
+        const ancho = borde.tarjeta.clientWidth;
+        const alto = borde.tarjeta.clientHeight;
+
+        borde.rect.setAttribute(
+          'width',
+          String(Math.max(1, ancho - 4))
+        );
+
+        borde.rect.setAttribute(
+          'height',
+          String(Math.max(1, alto - 4))
+        );
+
+        const perimetro = borde.rect.getTotalLength();
+
+        borde.perimetro = perimetro;
+
+        borde.rect.style.strokeDasharray =
+          `${SEGMENTO} ${Math.max(1, perimetro - SEGMENTO)}`;
+      });
+    }
+
+    function animar(tiempo: number) {
+      if (destruido || !bordes[0].tarjeta.isConnected) {
+        frameId = 0;
+        return;
+      }
+
+      const progreso =
+        ((tiempo - inicio) % DURACION) / DURACION;
+
+      bordes.forEach((borde) => {
+        if (!borde.perimetro) return;
+
+        const radio = 12;
+        const ajusteEsquina = radio * (Math.PI / 2 - 1);
+
+        const desplazamiento =
+          -(progreso * borde.perimetro + ajusteEsquina);
+
+        borde.rect.style.strokeDashoffset =
+          String(desplazamiento);
+      });
+
+      frameId = requestAnimationFrame(animar);
+    }
+
+    ajustarBordes();
+
+    const observador = new ResizeObserver(ajustarBordes);
+
+    bordes.forEach((borde) => {
+      observador.observe(borde.tarjeta);
+    });
+
+    if (!movimientoReducido) {
+      frameId = requestAnimationFrame(animar);
+    }
+
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        destruido = true;
+        cancelAnimationFrame(frameId);
+        observador.disconnect();
+      },
+      { once: true }
+    );
+  }
+
+  /* ==========================================
+     GLITCH DE CUADRADOS
+     ========================================== */
+
+  function iniciarCamposGlitch() {
+    const campos = document.querySelectorAll<HTMLElement>(
+      '[data-glitch-campo]'
+    );
+
+    campos.forEach((campo) => {
+      if (campo.dataset.inicializado === 'true') return;
+
+      const canvas = campo.querySelector<HTMLCanvasElement>(
+        '.glitch-canvas'
+      );
+
+      const contexto = canvas?.getContext('2d');
+
+      if (!canvas || !contexto) return;
+
+      campo.dataset.inicializado = 'true';
+
+      const ctx = contexto;
+
+      const movimientoReducido = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
+      type Fragmento = {
+        x: number;
+        y: number;
+        origenX: number;
+        origenY: number;
+        vx: number;
+        vy: number;
+        ancho: number;
+        alto: number;
+        color: string;
+        alpha: number;
+        alphaBase: number;
+        fase: number;
+        velocidad: number;
+        tipo: number;
+      };
+
+      const colores = [
+        '#ec4899',
+        '#f472b6',
+        '#67e8f9',
+        '#22d3ee',
+        '#a855f7',
+      ];
+
+      const aleatorio = (min: number, max: number) =>
+        min + Math.random() * (max - min);
+
+      let ancho = 1;
+      let alto = 1;
+      let fragmentos: Fragmento[] = [];
+
+      let mouseX = -1000;
+      let mouseY = -1000;
+      let mouseDentro = false;
+
+      let frameId = 0;
+      let ultimoTiempo = 0;
+      let activo = false;
+      let destruido = false;
+
+      let siguienteRafaga = 0;
+      let desplazamientoRafaga = 0;
+      let franjaRafaga = 0;
+
+      function crearFragmento(): Fragmento {
+        const x = aleatorio(0, ancho);
+        const y = aleatorio(0, alto);
+
+        const tipo = Math.random();
+
+        const tamano =
+          tipo > 0.94
+            ? aleatorio(14, 24)
+            : tipo > 0.65
+              ? aleatorio(7, 13)
+              : aleatorio(2, 6);
+
+        return {
+          x,
+          y,
+          origenX: x,
+          origenY: y,
+          vx: 0,
+          vy: 0,
+          ancho: tamano,
+          alto: tamano,
+          color: colores[Math.floor(Math.random() * colores.length)],
+          alpha: aleatorio(0, 0.3),
+          alphaBase: aleatorio(0.35, 0.95),
+          fase: aleatorio(0, Math.PI * 2),
+          velocidad: aleatorio(0.6, 3),
+          tipo,
+        };
+      }
+
+      function ajustarCanvas() {
+        const rect = campo.getBoundingClientRect();
+
+        ancho = Math.max(1, rect.width);
+        alto = Math.max(1, rect.height);
+
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        canvas.width = Math.round(ancho * dpr);
+        canvas.height = Math.round(alto * dpr);
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        const cantidad = Math.min(
+          620,
+          Math.max(220, Math.floor((ancho * alto) / 360))
+        );
+
+        fragmentos = Array.from(
+          { length: cantidad },
+          crearFragmento
+        );
+
+        if (movimientoReducido) {
+          fragmentos.forEach((fragmento) => {
+            fragmento.alpha = fragmento.alphaBase;
+          });
+
+          dibujar(0);
+        }
+      }
+
+      function dibujar(tiempo: number) {
+        ctx.clearRect(0, 0, ancho, alto);
+
+        for (const f of fragmentos) {
+          if (f.alpha < 0.015) continue;
+
+          const parpadeo =
+            Math.sin(tiempo * 0.008 * f.velocidad + f.fase);
+
+          const opacidad = Math.max(
+            0,
+            Math.min(1, f.alpha * (0.7 + parpadeo * 0.3))
+          );
+
+          let desplazamientoX = 0;
+
+          if (
+            desplazamientoRafaga !== 0 &&
+            Math.abs(f.y - franjaRafaga) < 22
+          ) {
+            desplazamientoX = desplazamientoRafaga;
+          }
+
+          ctx.globalAlpha = opacidad;
+          ctx.fillStyle = f.color;
+
+          ctx.fillRect(
+            Math.round(f.x + desplazamientoX),
+            Math.round(f.y),
+            f.ancho,
+            f.alto
+          );
+        }
+
+        ctx.globalAlpha = 1;
+      }
+
+      function actualizar(tiempo: number) {
+        if (!activo || destruido || !campo.isConnected) {
+          frameId = 0;
+          return;
+        }
+
+        const delta = ultimoTiempo
+          ? Math.min((tiempo - ultimoTiempo) / 16.67, 2)
+          : 1;
+
+        ultimoTiempo = tiempo;
+
+        /* RÁFAGAS DE INTERFERENCIA */
+
+        if (tiempo > siguienteRafaga) {
+          franjaRafaga = aleatorio(0, alto);
+          desplazamientoRafaga = aleatorio(-55, 55);
+
+          siguienteRafaga = tiempo + aleatorio(100, 420);
+        }
+
+        desplazamientoRafaga *= Math.pow(0.85, delta);
+
+        for (const f of fragmentos) {
+          const dx = f.x - mouseX;
+          const dy = f.y - mouseY;
+          const distancia = Math.hypot(dx, dy);
+
+          const radio = 115;
+          const cerca = mouseDentro && distancia < radio;
+
+          /* DISPERSIÓN AL ACERCAR EL MOUSE O TOCAR */
+
+          if (cerca) {
+            const fuerza = 1 - distancia / radio;
+            const angulo = Math.atan2(dy, dx);
+
+            f.vx += Math.cos(angulo) * fuerza * 4.5 * delta;
+            f.vy += Math.sin(angulo) * fuerza * 3.2 * delta;
+          }
+
+          /* RETORNO AL CAMPO */
+
+          f.vx += (f.origenX - f.x) * 0.012 * delta;
+          f.vy += (f.origenY - f.y) * 0.012 * delta;
+
+          f.vx *= Math.pow(0.87, delta);
+          f.vy *= Math.pow(0.87, delta);
+
+          f.x += f.vx * delta;
+          f.y += f.vy * delta;
+
+          /* DESAPARECER Y REGENERARSE */
+
+          const distanciaOrigen = Math.hypot(
+            f.origenX - mouseX,
+            f.origenY - mouseY
+          );
+
+          const ocultar =
+            mouseDentro && distanciaOrigen < radio;
+
+          const alphaObjetivo = ocultar ? 0 : f.alphaBase;
+          const suavizado = ocultar ? 0.22 : 0.035;
+
+          f.alpha +=
+            (alphaObjetivo - f.alpha) *
+            Math.min(suavizado * delta, 1);
+
+          /* GLITCHES INDIVIDUALES */
+
+          if (Math.random() < 0.025 * delta) {
+            f.x += aleatorio(-28, 28);
+          }
+
+          if (Math.random() < 0.012 * delta) {
+            f.y += aleatorio(-8, 8);
+          }
+
+          if (Math.random() < 0.003 * delta) {
+            f.origenX = Math.max(
+              0,
+              Math.min(ancho, f.origenX + aleatorio(-25, 25))
+            );
+
+            f.origenY = Math.max(
+              0,
+              Math.min(alto, f.origenY + aleatorio(-15, 15))
+            );
+          }
+        }
+
+        dibujar(tiempo);
+        frameId = requestAnimationFrame(actualizar);
+      }
+
+      /* ==========================================
+         INTERACCIÓN MOUSE + TÁCTIL
+         ========================================== */
+
+      function actualizarPosicion(evento: PointerEvent) {
+        const rect = campo.getBoundingClientRect();
+
+        mouseX = evento.clientX - rect.left;
+        mouseY = evento.clientY - rect.top;
+        mouseDentro = true;
+      }
+
+      function iniciarContacto(evento: PointerEvent) {
+        /*
+          En PC: basta con mover el mouse.
+          En móvil: el efecto comienza al tocar.
+        */
+        if (evento.pointerType === 'mouse') {
+          actualizarPosicion(evento);
+          return;
+        }
+
+        campo.setPointerCapture(evento.pointerId);
+        actualizarPosicion(evento);
+      }
+
+      function moverPuntero(evento: PointerEvent) {
+        /*
+          Mouse: reacciona sin hacer clic.
+          Touch: reacciona mientras se arrastra.
+          F12 móvil: acepta los eventos touch simulados.
+        */
+        if (
+          evento.pointerType === 'mouse' ||
+          evento.buttons > 0
+        ) {
+          actualizarPosicion(evento);
+        }
+      }
+
+      function salirPuntero(evento: PointerEvent) {
+        if (evento.pointerType === 'mouse') {
+          mouseDentro = false;
+          mouseX = -1000;
+          mouseY = -1000;
+        }
+      }
+
+      function terminarContacto(evento: PointerEvent) {
+        if (evento.pointerType === 'mouse') return;
+
+        mouseDentro = false;
+        mouseX = -1000;
+        mouseY = -1000;
+
+        if (campo.hasPointerCapture(evento.pointerId)) {
+          campo.releasePointerCapture(evento.pointerId);
+        }
+      }
+
+      function iniciar() {
+        if (movimientoReducido || destruido || activo) return;
+
+        activo = true;
+        ultimoTiempo = 0;
+        frameId = requestAnimationFrame(actualizar);
+      }
+
+      function detener() {
+        activo = false;
+        cancelAnimationFrame(frameId);
+        frameId = 0;
+      }
+
+      ajustarCanvas();
+
+      if (!movimientoReducido) {
+        campo.addEventListener('pointerdown', iniciarContacto);
+        campo.addEventListener('pointermove', moverPuntero);
+        campo.addEventListener('pointerleave', salirPuntero);
+        campo.addEventListener('pointerup', terminarContacto);
+        campo.addEventListener('pointercancel', terminarContacto);
+      }
+
+      const observadorTamaño = new ResizeObserver(ajustarCanvas);
+      observadorTamaño.observe(campo);
+
+      const observadorVisibilidad = new IntersectionObserver(
+        (entradas) => {
+          if (entradas[0]?.isIntersecting) {
+            iniciar();
+          } else {
+            detener();
+          }
+        },
+        { threshold: 0.05 }
+      );
+
+      observadorVisibilidad.observe(campo);
+
+      document.addEventListener(
+        'astro:before-swap',
+        () => {
+          destruido = true;
+          detener();
+          observadorTamaño.disconnect();
+          observadorVisibilidad.disconnect();
+        },
+        { once: true }
+      );
+    });
+  }
+
+  /* INICIALIZACIÓN ASTRO */
+
+  function iniciarSobreMi() {
+    iniciarBordesAnimados();
+    iniciarCamposGlitch();
+  }
+
+  document.addEventListener(
+    'astro:page-load',
+    iniciarSobreMi
+  );
+
+  if (document.readyState === 'loading') {
+    document.addEventListener(
+      'DOMContentLoaded',
+      iniciarSobreMi,
+      { once: true }
+    );
+  } else {
+    iniciarSobreMi();
+  }
+</script>
