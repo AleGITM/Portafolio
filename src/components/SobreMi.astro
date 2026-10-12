@@ -1,91 +1,76 @@
+
+---
+const lenguajes = [
+  { nombre: 'Python', icono: '/icons/python.svg' },
+  { nombre: 'JavaScript', icono: '/icons/javascript.svg' },
+  { nombre: 'PHP', icono: '/icons/php.svg' },
+  { nombre: 'MySQL', icono: '/icons/mysql.svg' },
+];
+---
+
 <section
-	id="sobre-mi"
-	class="relative overflow-hidden bg-[#02030a] px-6 py-24 sm:py-28"
+  id="sobre-mi"
+  class="bg-[#02030a] px-6 py-24 sm:py-28"
 >
-	<!-- Luz ambiental que conecta visualmente esta sección con el Hero -->
-	<div
-		class="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-cyan-400/10 blur-[120px]"
-	></div>
+  <div class="mx-auto max-w-6xl">
 
-	<div class="relative z-10 mx-auto max-w-6xl">
-		<div class="grid items-center gap-14 lg:grid-cols-[1.3fr_0.7fr] lg:gap-20">
+    <!-- Presentación profesional -->
+    <div class="max-w-3xl">
+      <p class="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-pink-400">
+      </p>
 
-			<!-- Presentación profesional -->
-			<div>
-				<p class="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-pink-400">
-					Conóceme
-				</p>
+      <h2 class="text-4xl font-bold text-white sm:text-5xl">
+        Sobre
+        <span
+          class="font-accent ml-2 text-pink-400 [text-shadow:0_0_20px_rgba(255,46,151,0.45)]"
+        >
+          mí
+        </span>
+      </h2>
 
-				<h2 class="text-4xl font-bold text-white sm:text-5xl">
-					Sobre
-					<span
-						class="font-accent ml-2 text-pink-400 [text-shadow:0_0_20px_rgba(255,46,151,0.45)]"
-					>
-						mí
-					</span>
-				</h2>
+      <div class="mt-8 space-y-5 text-base leading-relaxed text-gray-300 sm:text-lg">
+        <p>
+          Soy estudiante de cuarto año de Ingeniería en Informática en AIEP,
+          con interés en el desarrollo de software y las distintas áreas de
+          la tecnología.
+        </p>
 
-				<div class="mt-8 max-w-2xl space-y-5 text-base leading-relaxed text-gray-300 sm:text-lg">
-					<p>
-						Soy estudiante de cuarto año de Ingeniería en Informática en AIEP,
-						con interés en el desarrollo de software y especialmente en el
-						desarrollo front-end.
-					</p>
+        <p>
+          Durante mi formación académica he trabajado en proyectos de
+          desarrollo web, programación, bases de datos y análisis de datos,
+          aplicando los conocimientos adquiridos en distintas asignaturas.
+        </p>
+      </div>
+    </div>
 
-					<p>
-						Durante mi formación he trabajado con distintas áreas de la
-						informática, desde desarrollo web y bases de datos hasta proyectos
-						de Business Intelligence.
-					</p>
+    <!-- Lenguajes y tecnologías -->
+    <div class="mt-12 max-w-3xl">
+      <h3 class="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
+       Tecnologías
+      </h3>
 
-					<p>
-						Fuera del código, me interesan el cine y la estética cyberpunk,
-						una de las principales inspiraciones visuales de este portafolio.
-					</p>
-				</div>
-			</div>
+      <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {lenguajes.map((lenguaje) => (
+          <div
+            class="flex min-h-28 flex-col items-center justify-center gap-3 rounded-xl border border-pink-500/20 bg-white/[0.03] p-4 transition-colors duration-200 hover:border-pink-400/60 hover:bg-white/[0.05]"
+          >
+            <img
+              src={lenguaje.icono}
+              alt=""
+              aria-hidden="true"
+              width="42"
+              height="42"
+              loading="lazy"
+              class="h-10 w-10 object-contain"
+            />
 
-			<!-- Resumen rápido del perfil -->
-			<div
-				class="rounded-2xl border border-pink-500/20 bg-white/[0.03] p-7 backdrop-blur-sm sm:p-8"
-			>
-				<div class="space-y-7">
-					<div>
-						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
-							Estudios
-						</p>
-						<p class="mt-2 text-lg font-medium text-white">
-							Ingeniería en Informática
-						</p>
-						<p class="mt-1 text-sm text-gray-400">
-							AIEP · 4.º año
-						</p>
-					</div>
+            <span class="text-center text-sm font-medium text-gray-200">
+              {lenguaje.nombre}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
 
-					<div class="h-px bg-gradient-to-r from-pink-500/40 to-transparent"></div>
-
-					<div>
-						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
-							Interés principal
-						</p>
-						<p class="mt-2 text-lg font-medium text-white">
-							Desarrollo front-end
-						</p>
-					</div>
-
-					<div class="h-px bg-gradient-to-r from-pink-500/40 to-transparent"></div>
-
-					<div>
-						<p class="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-300">
-							Experiencia académica
-						</p>
-						<p class="mt-2 text-lg font-medium text-white">
-							Desarrollo · Bases de datos · BI
-						</p>
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</div>
+  </div>
 </section>
