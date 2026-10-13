@@ -1,3 +1,4 @@
+
 ---
 const fuentes = [
   { nombre: 'SII', detalle: 'Actividad económica por comuna, 2005–2024.' },
@@ -13,37 +14,6 @@ const archivos = {
   powerbi: '/archivos/colchagua.pbix',
   informe: '/archivos/informe-colchagua.pdf',
 };
-
-const graficos = [
-  {
-    src: '/graficos/incendios_anuales.png',
-    categoria: 'Análisis temporal',
-    titulo: 'Incendios por año',
-    descripcion: 'Evolución de la frecuencia de incendios forestales registrados entre 1985 y 2024.',
-    alt: 'Gráfico de incendios forestales por año de término.',
-  },
-  {
-    src: '/graficos/superficie_anual.png',
-    categoria: 'Análisis temporal',
-    titulo: 'Superficie quemada por año',
-    descripcion: 'La superficie afectada varía considerablemente entre años, con un máximo destacado en 2017.',
-    alt: 'Gráfico de superficie afectada por incendios según año de término.',
-  },
-  {
-    src: '/graficos/superficie_comunas.png',
-    categoria: 'Comparación territorial',
-    titulo: 'Superficie quemada por comuna',
-    descripcion: 'Pumanque registra la mayor superficie quemada acumulada del periodo analizado.',
-    alt: 'Gráfico de superficie quemada acumulada por comuna de Colchagua.',
-  },
-  {
-    src: '/graficos/catastro_fruticola.png',
-    categoria: 'Comparación territorial',
-    titulo: 'Catastro Frutícola 2024',
-    descripcion: 'Comparación de indicadores de superficie de cerezos y riego por goteo entre comunas.',
-    alt: 'Gráfico comparativo de indicadores del Catastro Frutícola 2024.',
-  },
-];
 
 const cifras = [
   { valor: '10', etiqueta: 'Comunas analizadas' },
@@ -106,13 +76,18 @@ const etapas = [
       </h2>
 
       <p class="mt-4 max-w-3xl leading-7 text-gray-400">
-        Explora las principales etapas de la investigación y sus resultados.
+        Explora las etapas del estudio, desde la preparación de datos
+        hasta la presentación de resultados.
       </p>
 
       <div class="colchagua-panel mt-9" data-tabs-root>
 
         <!-- NAVEGACIÓN ENTRE ETAPAS -->
-        <nav class="colchagua-tabs" aria-label="Etapas de la investigación" role="tablist">
+        <nav
+          class="colchagua-tabs"
+          aria-label="Etapas de la investigación"
+          role="tablist"
+        >
           {etapas.map((etapa, index) => (
             <button
               type="button"
@@ -124,7 +99,8 @@ const etapas = [
               data-tab={index}
               class:list={{ 'is-active': index === 0 }}
             >
-              <span>{String(index + 1).padStart(2, '0')}</span> {etapa}
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              {etapa}
             </button>
           ))}
         </nav>
@@ -150,15 +126,11 @@ const etapas = [
 
             <h4 class="colchagua-subheading">Fuentes utilizadas</h4>
 
-            <div class="divide-y divide-white/10 border-y border-white/10">
+            <div class="fuentes-lista">
               {fuentes.map((fuente) => (
-                <div class="grid gap-2 py-3 sm:grid-cols-[145px_1fr] sm:gap-5">
-                  <span class="font-mono text-sm text-cyan-300">
-                    {fuente.nombre}
-                  </span>
-                  <p class="text-sm leading-6 text-gray-300">
-                    {fuente.detalle}
-                  </p>
+                <div class="fuente-fila">
+                  <span class="fuente-nombre">{fuente.nombre}</span>
+                  <p>{fuente.detalle}</p>
                 </div>
               ))}
             </div>
@@ -179,7 +151,7 @@ const etapas = [
                 <span class="colchagua-extension">.ipynb</span>
                 <span>
                   <strong>Notebook de investigación</strong>
-                  <small>ETL, Datamart y análisis</small>
+                  <small>Preparación de datos y análisis</small>
                 </span>
                 <span aria-hidden="true">↗</span>
               </a>
@@ -198,96 +170,64 @@ const etapas = [
             <h3 class="colchagua-heading">Análisis exploratorio</h3>
 
             <p class="colchagua-copy">
-              Se exploraron los registros de incendios y la información
-              agrícola para identificar patrones, valores extremos y
-              diferencias entre comunas antes de aplicar los modelos analíticos.
+              Se examinaron los registros de incendios forestales y los
+              indicadores agrícolas para reconocer patrones temporales,
+              diferencias entre comunas y valores extremos.
+              Esta exploración permitió comprender las características
+              de los datos antes de desarrollar los modelos analíticos.
             </p>
 
-            <!-- CARRUSEL DE GRÁFICOS -->
-            <div
-              class="grafico-carrusel mt-9"
-              data-graficos-root
-              aria-label="Gráficos del análisis exploratorio"
-              aria-roledescription="carrusel"
-            >
-              <div class="grafico-cabecera">
-                <p class="grafico-cabecera-titulo">
-                  Visualizaciones del análisis
-                </p>
+            <h4 class="colchagua-subheading">
+              Aspectos investigados
+            </h4>
 
-                <span data-grafico-counter class="font-mono text-xs text-gray-400">
-                  01 / 04
-                </span>
-              </div>
-
-              <div class="grafico-visor">
-                {graficos.map((grafico, index) => (
-                  <figure
-                    class="grafico-slide"
-                    data-grafico-slide
-                    aria-label={`Gráfico ${index + 1} de ${graficos.length}`}
-                    hidden={index !== 0}
-                  >
-                    <div class="grafico-imagen">
-                      <img
-                        src={grafico.src}
-                        alt={grafico.alt}
-                        loading="lazy"
-                      />
-                    </div>
-
-                    <figcaption class="grafico-descripcion">
-                      <p class="grafico-categoria">{grafico.categoria}</p>
-                      <h4 class="grafico-titulo">{grafico.titulo}</h4>
-                      <p class="grafico-texto">{grafico.descripcion}</p>
-                    </figcaption>
-                  </figure>
-                ))}
-              </div>
-
-              <div class="grafico-controles">
-                <button
-                  type="button"
-                  class="grafico-boton"
-                  data-grafico-prev
-                  aria-label="Ver gráfico anterior"
-                >
-                  <span aria-hidden="true">←</span>
-                  Anterior
-                </button>
-
-                <div class="grafico-indicadores" aria-label="Seleccionar gráfico">
-                  {graficos.map((grafico, index) => (
-                    <button
-                      type="button"
-                      class:list={[
-                        'grafico-indicador',
-                        { 'is-active': index === 0 },
-                      ]}
-                      data-grafico-dot={index}
-                      aria-label={`Ver gráfico ${index + 1}: ${grafico.titulo}`}
-                      aria-current={index === 0 ? 'true' : undefined}
-                    />
-                  ))}
+            <div class="analisis-lista">
+              <div class="analisis-fila">
+                <span class="analisis-numero">01</span>
+                <div>
+                  <h4>Evolución de incendios forestales</h4>
+                  <p>
+                    Se estudió su frecuencia histórica y la variación
+                    de la superficie afectada entre temporadas.
+                  </p>
                 </div>
+              </div>
 
-                <button
-                  type="button"
-                  class="grafico-boton"
-                  data-grafico-next
-                  aria-label="Ver gráfico siguiente"
-                >
-                  Siguiente
-                  <span aria-hidden="true">→</span>
-                </button>
+              <div class="analisis-fila">
+                <span class="analisis-numero">02</span>
+                <div>
+                  <h4>Diferencias entre comunas</h4>
+                  <p>
+                    Se compararon indicadores territoriales para
+                    identificar distintos niveles de exposición
+                    y características productivas.
+                  </p>
+                </div>
+              </div>
+
+              <div class="analisis-fila">
+                <span class="analisis-numero">03</span>
+                <div>
+                  <h4>Actividad agrícola</h4>
+                  <p>
+                    Se revisó información del sector agrícola,
+                    incluyendo indicadores del Catastro Frutícola
+                    y otras fuentes oficiales.
+                  </p>
+                </div>
               </div>
             </div>
+
+            <p class="colchagua-nota">
+              El análisis detallado, el código y las visualizaciones
+              originales se encuentran en el notebook de investigación.
+            </p>
 
             <div class="colchagua-downloads">
               <a class="colchagua-download" href={archivos.notebook} download>
                 <span class="colchagua-extension">.ipynb</span>
                 <span>
-                  <strong>Ver análisis completo</strong>
+                  <strong>Consultar análisis completo</strong>
                   <small>Notebook con código y visualizaciones</small>
                 </span>
                 <span aria-hidden="true">↗</span>
@@ -355,7 +295,7 @@ const etapas = [
               <a class="colchagua-download" href={archivos.notebook} download>
                 <span class="colchagua-extension">.ipynb</span>
                 <span>
-                  <strong>Ver modelo completo</strong>
+                  <strong>Consultar modelo completo</strong>
                   <small>Clustering y evaluación</small>
                 </span>
                 <span aria-hidden="true">↗</span>
@@ -383,41 +323,40 @@ const etapas = [
 
             <h4 class="colchagua-subheading">Comparación de modelos</h4>
 
-            <div class="overflow-x-auto border-y border-white/10">
-              <table class="w-full border-collapse text-left text-sm">
+            <div class="modelos-tabla">
+              <table>
                 <thead>
-                  <tr class="border-b border-white/10 text-xs uppercase tracking-wider text-cyan-300">
-                    <th class="py-4 pr-5 font-medium">Modelo</th>
-                    <th class="py-4 font-medium">MAE</th>
+                  <tr>
+                    <th>Modelo</th>
+                    <th>MAE</th>
                   </tr>
                 </thead>
-
-                <tbody class="text-gray-300">
-                  <tr class="border-b border-white/10">
-                    <td class="py-4 pr-5 text-white">Persistencia</td>
-                    <td class="py-4 font-mono text-pink-400">17,33</td>
-                  </tr>
-                  <tr class="border-b border-white/10">
-                    <td class="py-4 pr-5">Promedio histórico</td>
-                    <td class="py-4 font-mono">19,18</td>
+                <tbody>
+                  <tr>
+                    <td>Persistencia</td>
+                    <td class="modelo-destacado">17,33</td>
                   </tr>
                   <tr>
-                    <td class="py-4 pr-5">Holt</td>
-                    <td class="py-4 font-mono">28,51</td>
+                    <td>Promedio histórico</td>
+                    <td>19,18</td>
+                  </tr>
+                  <tr>
+                    <td>Holt</td>
+                    <td>28,51</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            <div class="mt-8 border-l-2 border-cyan-300/50 pl-5">
-              <p class="font-mono text-4xl text-white">80</p>
-              <p class="mt-2 text-sm text-gray-300">
+            <div class="pronostico-destacado">
+              <p class="pronostico-valor">80</p>
+              <p class="pronostico-descripcion">
                 Incendios proyectados por temporada:
                 2024–25, 2025–26 y 2026–27.
               </p>
-              <p class="mt-3 text-sm leading-7 text-gray-400">
-                Proyección exploratoria basada en el último valor observado,
-                sin incorporar variables climáticas.
+              <p class="pronostico-nota">
+                Proyección exploratoria basada en el último valor
+                observado, sin incorporar variables climáticas.
               </p>
             </div>
 
@@ -425,7 +364,7 @@ const etapas = [
               <a class="colchagua-download" href={archivos.notebook} download>
                 <span class="colchagua-extension">.ipynb</span>
                 <span>
-                  <strong>Ver pronóstico completo</strong>
+                  <strong>Consultar pronóstico completo</strong>
                   <small>Modelos y evaluación</small>
                 </span>
                 <span aria-hidden="true">↗</span>
@@ -445,38 +384,39 @@ const etapas = [
             <h3 class="colchagua-heading">Power BI y conclusiones</h3>
 
             <p class="colchagua-copy">
-              Se desarrolló un dashboard para visualizar los indicadores
-              económicos, agrícolas y ambientales de Colchagua y facilitar
-              la comparación territorial.
+              Como parte de la presentación del proyecto, se utiliza
+              Power BI para organizar y visualizar los indicadores
+              económicos, agrícolas y ambientales de Colchagua,
+              facilitando su interpretación y comparación territorial.
             </p>
 
-            <figure class="dashboard-figura mt-8 overflow-hidden border border-white/10 bg-[#0a1020]">
-              <img
-                src="/imagenes/dashboard-colchagua.png"
-                alt="Dashboard de Power BI sobre Colchagua"
-                class="h-auto w-full"
-                loading="lazy"
-              />
-              <figcaption class="border-t border-white/10 px-4 py-3 text-xs text-gray-400">
-                Dashboard desarrollado en Power BI Desktop.
-              </figcaption>
-            </figure>
+            <!-- ESPACIO PARA EL DASHBOARD DEFINITIVO -->
+            <div class="dashboard-pendiente">
+              <span class="dashboard-icono" aria-hidden="true">▤</span>
+              <h4>Dashboard de Power BI</h4>
+              <p>
+                La visualización interactiva se incorporará
+                cuando esté lista la versión definitiva.
+              </p>
+            </div>
 
             <h4 class="colchagua-subheading">Principales conclusiones</h4>
 
             <div class="conclusiones-lista">
               <p>
                 <span>01</span>
-                San Fernando registra la mayor frecuencia histórica de
-                incendios, mientras que Pumanque presenta la mayor
+                San Fernando registra la mayor frecuencia histórica
+                de incendios, mientras que Pumanque presenta la mayor
                 superficie quemada.
               </p>
+
               <p>
                 <span>02</span>
                 Las comunas presentan perfiles agrícolas y ambientales
                 diferentes, por lo que no es adecuado evaluarlas
                 mediante un único indicador.
               </p>
+
               <p>
                 <span>03</span>
                 Los resultados sirven como base descriptiva para apoyar
@@ -507,9 +447,10 @@ const etapas = [
               </a>
             </div>
           </section>
+
         </div>
 
-        <!-- CONTROLES DE ETAPAS -->
+        <!-- CONTROLES DEL CARRUSEL -->
         <div class="colchagua-controls">
           <span data-counter class="font-mono text-xs text-gray-500">
             01 / 05
@@ -531,6 +472,7 @@ const etapas = [
             >→</button>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -557,20 +499,19 @@ const etapas = [
         ))}
       </div>
 
-      <div class="mt-9 max-w-4xl border-l-2 border-cyan-300/60 pl-5">
-        <p class="text-sm font-medium text-cyan-300">
-          Hallazgo destacado
-        </p>
+      <div class="hallazgo-destacado">
+        <p class="hallazgo-titulo">Hallazgo destacado</p>
 
-        <p class="mt-3 leading-8 text-gray-300">
-          San Fernando acumuló <strong class="text-white">1.056 incendios</strong>,
+        <p class="hallazgo-texto">
+          San Fernando acumuló <strong>1.056 incendios</strong>,
           mientras que Pumanque registró aproximadamente
-          <strong class="text-white">57.774 hectáreas quemadas</strong>.
+          <strong> 57.774 hectáreas quemadas</strong>.
           La frecuencia y la superficie afectada representan
           dimensiones distintas de exposición territorial.
         </p>
       </div>
     </section>
+
   </div>
 </section>
 
@@ -601,17 +542,11 @@ const etapas = [
       background-color 300ms ease;
   }
 
-  /*
-    El destello es un borde real de 1 px.
-    No cubre ni oscurece el contenido.
-  */
   .colchagua-panel::before {
     content: '';
     position: absolute;
     inset: 0;
     z-index: 2;
-    width: auto;
-    height: auto;
     pointer-events: none;
     border: 1px solid transparent;
     background:
@@ -732,210 +667,186 @@ const etapas = [
   }
 
   /* ==========================================
-     CARRUSEL DE GRÁFICOS
+     FUENTES DE DATOS
      ========================================== */
 
-  .grafico-carrusel {
-    max-width: 850px;
-    margin-inline: auto;
-    overflow: hidden;
-    border: 1px solid rgba(103, 232, 249, 0.22);
-    background: #080e20;
-    transition:
-      border-color 240ms ease,
-      box-shadow 240ms ease,
-      background-color 240ms ease;
+  .fuentes-lista {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .grafico-cabecera {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  .fuente-fila {
+    display: grid;
+    gap: 0.5rem;
+    padding: 0.8rem 0;
   }
 
-  .grafico-cabecera-titulo {
-    color: #f9a8d4;
-    font-size: 0.78rem;
-    font-weight: 600;
+  .fuente-fila + .fuente-fila {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .grafico-visor {
-    position: relative;
-    padding: 1.25rem;
-    overflow: hidden;
-    touch-action: pan-y;
-    transition: none;
-  }
-
-  .grafico-slide {
-    width: 100%;
-    margin: 0;
-  }
-
-  .grafico-slide[hidden] {
-    display: none !important;
-  }
-
-  .grafico-slide.grafico-saliendo,
-  .grafico-slide.grafico-entrando {
-    position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
-    width: calc(100% - 2.5rem);
-    pointer-events: none;
-  }
-
-  .grafico-slide.grafico-saliendo {
-    z-index: 1;
-  }
-
-  .grafico-slide.grafico-entrando {
-    z-index: 2;
-  }
-
-  .grafico-imagen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 760px;
-    margin-inline: auto;
-    overflow: hidden;
-    background: #fff;
-  }
-
-  .grafico-imagen img {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 440px;
-    object-fit: contain;
-  }
-
-  .grafico-descripcion {
-    max-width: 760px;
-    margin-inline: auto;
-    padding: 1.25rem 0 0.35rem;
-  }
-
-  .grafico-categoria {
-    margin-bottom: 0.4rem;
+  .fuente-nombre {
     color: #67e8f9;
     font-family: monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: 0.875rem;
   }
 
-  .grafico-titulo {
-    color: #fff;
-    font-size: 1.15rem;
-    font-weight: 600;
-  }
-
-  .grafico-texto {
-    margin-top: 0.5rem;
-    max-width: 48rem;
-    color: #9ca3af;
-    font-size: 0.9rem;
-    line-height: 1.75;
-  }
-
-  .grafico-controles {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    margin: 0 1.25rem;
-    padding: 1rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .grafico-boton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.55rem;
-    min-height: 36px;
-    padding: 0.4rem 0.8rem;
-    border: 1px solid rgba(148, 163, 184, 0.3);
-    border-radius: 999px;
+  .fuente-fila p {
     color: #d1d5db;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition:
-      transform 200ms ease,
-      border-color 200ms ease,
-      color 200ms ease,
-      box-shadow 200ms ease;
-  }
-
-  .grafico-boton span {
-    color: #67e8f9;
-    font-size: 1rem;
-  }
-
-  .grafico-indicadores {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.55rem;
-  }
-
-  .grafico-indicador {
-    width: 8px;
-    height: 8px;
-    padding: 0;
-    border: 0;
-    border-radius: 999px;
-    background: #64748b;
-    cursor: pointer;
-    transition:
-      width 200ms ease,
-      background-color 200ms ease,
-      transform 200ms ease;
-  }
-
-  .grafico-indicador.is-active {
-    width: 24px;
-    background: #67e8f9;
+    font-size: 0.875rem;
+    line-height: 1.6;
   }
 
   /* ==========================================
-     PERFILES
+     ANÁLISIS EXPLORATORIO
      ========================================== */
 
+  .analisis-lista,
   .perfiles-lista {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
+  .analisis-fila,
   .perfil-fila {
     display: grid;
-    grid-template-columns: 36px 1fr;
+    grid-template-columns: 36px minmax(0, 1fr);
     gap: 1rem;
     padding: 1.25rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
+  .analisis-numero,
   .perfil-numero {
     color: #f472b6;
     font-family: monospace;
     font-size: 0.85rem;
   }
 
+  .analisis-fila h4,
   .perfil-fila h4 {
     color: #fff;
     font-size: 0.95rem;
     font-weight: 600;
   }
 
+  .analisis-fila p,
   .perfil-fila p {
     margin-top: 0.35rem;
     color: #9ca3af;
     font-size: 0.85rem;
+    line-height: 1.7;
+  }
+
+  .colchagua-nota {
+    margin-top: 1.5rem;
+    max-width: 48rem;
+    color: #94a3b8;
+    font-size: 0.875rem;
+    line-height: 1.8;
+  }
+
+  /* ==========================================
+     FORECAST
+     ========================================== */
+
+  .modelos-tabla {
+    max-width: 48rem;
+    overflow-x: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .modelos-tabla table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.875rem;
+  }
+
+  .modelos-tabla th {
+    padding: 1rem 1.25rem 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #67e8f9;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .modelos-tabla td {
+    padding: 1rem 1.25rem 1rem 0;
+    color: #d1d5db;
+  }
+
+  .modelos-tabla tbody tr:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .modelos-tabla .modelo-destacado {
+    color: #f472b6;
+    font-family: monospace;
+  }
+
+  .pronostico-destacado {
+    margin-top: 2rem;
+    padding-left: 1.25rem;
+    border-left: 2px solid rgba(103, 232, 249, 0.5);
+  }
+
+  .pronostico-valor {
+    color: #fff;
+    font-family: monospace;
+    font-size: 2.25rem;
+  }
+
+  .pronostico-descripcion {
+    margin-top: 0.5rem;
+    color: #d1d5db;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  .pronostico-nota {
+    margin-top: 0.75rem;
+    color: #9ca3af;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  /* ==========================================
+     POWER BI
+     ========================================== */
+
+  .dashboard-pendiente {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 220px;
+    margin-top: 2rem;
+    padding: 2rem;
+    border: 1px dashed rgba(103, 232, 249, 0.25);
+    background: #080e20;
+    text-align: center;
+  }
+
+  .dashboard-icono {
+    color: #67e8f9;
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .dashboard-pendiente h4 {
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .dashboard-pendiente p {
+    max-width: 28rem;
+    color: #94a3b8;
+    font-size: 0.875rem;
     line-height: 1.7;
   }
 
@@ -979,6 +890,29 @@ const etapas = [
 
   .cifra-item {
     min-width: 0;
+  }
+
+  .hallazgo-destacado {
+    max-width: 56rem;
+    margin-top: 2.25rem;
+    padding-left: 1.25rem;
+    border-left: 2px solid rgba(103, 232, 249, 0.6);
+  }
+
+  .hallazgo-titulo {
+    color: #67e8f9;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .hallazgo-texto {
+    margin-top: 0.75rem;
+    color: #d1d5db;
+    line-height: 2;
+  }
+
+  .hallazgo-texto strong {
+    color: #fff;
   }
 
   /* ==========================================
@@ -1060,7 +994,7 @@ const etapas = [
   }
 
   /* ==========================================
-     HOVER Y BORDE NEÓN ORIGINAL
+     HOVER Y BORDE NEÓN
      ========================================== */
 
   @media (hover: hover) and (pointer: fine) {
@@ -1075,26 +1009,10 @@ const etapas = [
       animation: colchagua-neon-recorrido 3s linear infinite;
     }
 
-    .grafico-carrusel:hover {
-      border-color: rgba(236, 72, 153, 0.5);
-      box-shadow: 0 0 18px rgba(236, 72, 153, 0.12);
-    }
-
     .colchagua-tabs button:hover {
       transform: translateY(-2px);
       color: #f9a8d4;
       text-shadow: 0 0 10px rgba(236, 72, 153, 0.2);
-    }
-
-    .grafico-boton:hover {
-      transform: translateY(-2px);
-      border-color: #ec4899;
-      color: #f9a8d4;
-      box-shadow: 0 4px 14px rgba(236, 72, 153, 0.16);
-    }
-
-    .grafico-boton:active {
-      transform: scale(0.96);
     }
 
     .colchagua-arrow:hover {
@@ -1112,15 +1030,10 @@ const etapas = [
       border-color: rgba(236, 72, 153, 0.6);
       background-color: rgba(236, 72, 153, 0.035);
     }
-
-    .grafico-indicador:hover {
-      transform: scale(1.2);
-      background-color: #f472b6;
-    }
   }
 
   /* ==========================================
-     RESPONSIVE ORIGINAL
+     RESPONSIVE
      ========================================== */
 
   @media (min-width: 640px) {
@@ -1141,51 +1054,37 @@ const etapas = [
     .cifras-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
+
+    .fuente-fila {
+      grid-template-columns: 145px minmax(0, 1fr);
+      gap: 1.25rem;
+    }
   }
 
   @media (max-width: 639px) {
-    .grafico-cabecera {
-      padding: 0.85rem;
+    .colchagua-tabs {
+      gap: 0.25rem 1.15rem;
     }
 
-    .grafico-visor {
-      padding: 0.75rem;
+    .colchagua-download {
+      gap: 0.75rem;
     }
 
-    .grafico-slide.grafico-saliendo,
-    .grafico-slide.grafico-entrando {
-      top: 0.75rem;
-      left: 0.75rem;
-      width: calc(100% - 1.5rem);
+    .colchagua-extension {
+      width: 3rem;
     }
 
-    .grafico-imagen img {
-      max-height: 320px;
-    }
-
-    .grafico-controles {
-      margin: 0 0.75rem;
-    }
-
-    .grafico-boton {
-      gap: 0.3rem;
-      padding: 0.4rem 0.55rem;
-      font-size: 0.72rem;
-    }
-
-    .grafico-indicadores {
-      gap: 0.35rem;
+    .dashboard-pendiente {
+      min-height: 190px;
+      padding: 1.5rem;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .colchagua-panel,
-    .grafico-carrusel,
-    .grafico-boton,
     .colchagua-arrow,
     .colchagua-tabs button,
-    .colchagua-download,
-    .grafico-indicador {
+    .colchagua-download {
       transition: none !important;
     }
 
@@ -1196,7 +1095,6 @@ const etapas = [
 
   /* ==========================================
      MODO CLARO
-     Se modifican colores, no funcionalidades.
      ========================================== */
 
   :global(html.light) .proyectos-section {
@@ -1212,10 +1110,7 @@ const etapas = [
     color: #475569;
   }
 
-  :global(html.light) .proyectos-section .text-gray-400 {
-    color: #64748b;
-  }
-
+  :global(html.light) .proyectos-section .text-gray-400,
   :global(html.light) .proyectos-section .text-gray-500 {
     color: #64748b;
   }
@@ -1228,15 +1123,6 @@ const etapas = [
     color: #0891b2;
   }
 
-  /* Bordes Tailwind usados en tablas y separadores */
-  :global(html.light) .proyectos-section .divide-white\/10 > :not(:last-child) {
-    border-color: rgba(15, 23, 42, 0.12);
-  }
-
-  :global(html.light) .proyectos-section .border-white\/10 {
-    border-color: rgba(15, 23, 42, 0.12);
-  }
-
   /* Panel principal */
   :global(html.light) .colchagua-panel {
     background: #ffffff;
@@ -1244,10 +1130,6 @@ const etapas = [
     border-bottom-color: rgba(15, 23, 42, 0.12);
   }
 
-  /*
-    Conserva el recorrido neón.
-    Solo sustituye el relleno oscuro por blanco.
-  */
   :global(html.light) .colchagua-panel::before {
     background:
       linear-gradient(#ffffff, #ffffff) padding-box,
@@ -1284,8 +1166,9 @@ const etapas = [
     background: #db2777;
   }
 
-  /* Contenido del panel */
-  :global(html.light) .colchagua-kicker {
+  /* Contenido */
+  :global(html.light) .colchagua-kicker,
+  :global(html.light) .fuente-nombre {
     color: #0891b2;
   }
 
@@ -1293,7 +1176,8 @@ const etapas = [
     color: #0f172a;
   }
 
-  :global(html.light) .colchagua-copy {
+  :global(html.light) .colchagua-copy,
+  :global(html.light) .fuente-fila p {
     color: #475569;
   }
 
@@ -1301,66 +1185,83 @@ const etapas = [
     color: #be185d;
   }
 
-  /* Carrusel de gráficos */
-  :global(html.light) .grafico-carrusel {
-    background: #f8fafc;
-    border-color: rgba(8, 145, 178, 0.3);
-  }
-
-  :global(html.light) .grafico-cabecera,
-  :global(html.light) .grafico-controles {
-    border-color: rgba(15, 23, 42, 0.12);
-  }
-
-  :global(html.light) .grafico-cabecera-titulo {
-    color: #be185d;
-  }
-
-  :global(html.light) .grafico-categoria {
-    color: #0891b2;
-  }
-
-  :global(html.light) .grafico-titulo {
-    color: #0f172a;
-  }
-
-  :global(html.light) .grafico-texto {
-    color: #475569;
-  }
-
-  :global(html.light) .grafico-boton {
-    color: #334155;
-    border-color: rgba(15, 23, 42, 0.2);
-  }
-
-  :global(html.light) .grafico-boton span {
-    color: #0891b2;
-  }
-
-  :global(html.light) .grafico-indicador {
-    background: #94a3b8;
-  }
-
-  :global(html.light) .grafico-indicador.is-active {
-    background: #0891b2;
-  }
-
-  /* Perfiles de Machine Learning */
+  /* Fuentes y análisis */
+  :global(html.light) .fuentes-lista,
+  :global(html.light) .fuente-fila + .fuente-fila,
+  :global(html.light) .analisis-lista,
+  :global(html.light) .analisis-fila,
   :global(html.light) .perfiles-lista,
   :global(html.light) .perfil-fila {
     border-color: rgba(15, 23, 42, 0.12);
   }
 
+  :global(html.light) .analisis-numero,
   :global(html.light) .perfil-numero {
     color: #db2777;
   }
 
+  :global(html.light) .analisis-fila h4,
   :global(html.light) .perfil-fila h4 {
     color: #0f172a;
   }
 
-  :global(html.light) .perfil-fila p {
+  :global(html.light) .analisis-fila p,
+  :global(html.light) .perfil-fila p,
+  :global(html.light) .colchagua-nota {
+    color: #64748b;
+  }
+
+  /* Forecast */
+  :global(html.light) .modelos-tabla,
+  :global(html.light) .modelos-tabla th,
+  :global(html.light) .modelos-tabla tbody tr {
+    border-color: rgba(15, 23, 42, 0.12);
+  }
+
+  :global(html.light) .modelos-tabla th {
+    color: #0891b2;
+  }
+
+  :global(html.light) .modelos-tabla td {
     color: #475569;
+  }
+
+  :global(html.light) .modelos-tabla .modelo-destacado {
+    color: #db2777;
+  }
+
+  :global(html.light) .pronostico-destacado {
+    border-left-color: rgba(8, 145, 178, 0.5);
+  }
+
+  :global(html.light) .pronostico-valor {
+    color: #0f172a;
+  }
+
+  :global(html.light) .pronostico-descripcion {
+    color: #475569;
+  }
+
+  :global(html.light) .pronostico-nota {
+    color: #64748b;
+  }
+
+  /* Power BI */
+  :global(html.light) .dashboard-pendiente {
+    background: #f8fafc;
+    border-color: rgba(8, 145, 178, 0.3);
+  }
+
+  :global(html.light) .dashboard-icono {
+    color: #0891b2;
+  }
+
+  :global(html.light) .dashboard-pendiente h4 {
+    color: #0f172a;
+  }
+
+  :global(html.light) .dashboard-pendiente p {
+    color: #64748b;
   }
 
   /* Conclusiones */
@@ -1381,6 +1282,22 @@ const etapas = [
   :global(html.light) .cifras-grid {
     border-top-color: rgba(8, 145, 178, 0.3);
     border-bottom-color: rgba(15, 23, 42, 0.12);
+  }
+
+  :global(html.light) .hallazgo-destacado {
+    border-left-color: rgba(8, 145, 178, 0.6);
+  }
+
+  :global(html.light) .hallazgo-titulo {
+    color: #0891b2;
+  }
+
+  :global(html.light) .hallazgo-texto {
+    color: #475569;
+  }
+
+  :global(html.light) .hallazgo-texto strong {
+    color: #0f172a;
   }
 
   /* Descargas */
@@ -1410,27 +1327,9 @@ const etapas = [
     color: #475569;
   }
 
-  /* Vista previa de Power BI */
-  :global(html.light) .dashboard-figura {
-    background: #ffffff;
-    border-color: rgba(15, 23, 42, 0.12);
-  }
-
-  :global(html.light) .dashboard-figura figcaption {
-    color: #64748b;
-    border-color: rgba(15, 23, 42, 0.12);
-  }
-
-  /* Ajustes de hover en modo claro */
+  /* Hover en modo claro */
   @media (hover: hover) and (pointer: fine) {
-    :global(html.light) .colchagua-tabs button:hover {
-      color: #be185d;
-    }
-
-    :global(html.light) .grafico-boton:hover {
-      color: #be185d;
-    }
-
+    :global(html.light) .colchagua-tabs button:hover,
     :global(html.light) .colchagua-arrow:hover {
       color: #be185d;
     }
@@ -1518,197 +1417,7 @@ const etapas = [
     });
   }
 
-  /* ==========================================
-     CARRUSEL DE GRÁFICOS DEL ANÁLISIS
-     ========================================== */
+  iniciarCarruseles();
 
-  function iniciarCarruselGraficos() {
-    document.querySelectorAll<HTMLElement>('[data-graficos-root]').forEach((root) => {
-      if (root.dataset.initialized === 'true') return;
-
-      root.dataset.initialized = 'true';
-
-      const slides = Array.from(
-        root.querySelectorAll<HTMLElement>('[data-grafico-slide]')
-      );
-
-      const dots = Array.from(
-        root.querySelectorAll<HTMLButtonElement>('[data-grafico-dot]')
-      );
-
-      const counter = root.querySelector<HTMLElement>('[data-grafico-counter]');
-      const prev = root.querySelector<HTMLButtonElement>('[data-grafico-prev]');
-      const next = root.querySelector<HTMLButtonElement>('[data-grafico-next]');
-      const visor = root.querySelector<HTMLElement>('.grafico-visor');
-
-      if (!slides.length || !visor) return;
-
-      let current = 0;
-      let animando = false;
-      let touchStartX = 0;
-      let touchStartY = 0;
-
-      const duracion = 420;
-
-      const reducirMovimiento = window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-      );
-
-      function actualizarControles() {
-        dots.forEach((dot, i) => {
-          const active = i === current;
-          dot.classList.toggle('is-active', active);
-
-          if (active) {
-            dot.setAttribute('aria-current', 'true');
-          } else {
-            dot.removeAttribute('aria-current');
-          }
-        });
-
-        if (counter) {
-          counter.textContent =
-            `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
-        }
-      }
-
-      function mostrar(index: number, direccionForzada?: number) {
-        if (animando) return;
-
-        const siguiente = (index + slides.length) % slides.length;
-
-        if (siguiente === current) return;
-
-        const anterior = current;
-        const slideAnterior = slides[anterior];
-        const slideSiguiente = slides[siguiente];
-
-        const direccion =
-          direccionForzada ?? (siguiente > anterior ? 1 : -1);
-
-        current = siguiente;
-        actualizarControles();
-
-        if (reducirMovimiento.matches) {
-          slideAnterior.hidden = true;
-          slideSiguiente.hidden = false;
-          return;
-        }
-
-        animando = true;
-
-        const alturaInicial = visor.getBoundingClientRect().height;
-        visor.style.height = `${alturaInicial}px`;
-
-        slideSiguiente.hidden = false;
-
-        slideAnterior.classList.add('grafico-saliendo');
-        slideSiguiente.classList.add('grafico-entrando');
-
-        // Desplazamiento horizontal y opacidad, sin zoom.
-        const distancia = 55;
-
-        const animacionSalida = slideAnterior.animate(
-          [
-            {
-              opacity: 1,
-              transform: 'translateX(0)',
-            },
-            {
-              opacity: 0,
-              transform: `translateX(${-direccion * distancia}px)`,
-            },
-          ],
-          {
-            duration: duracion,
-            easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-            fill: 'both',
-          }
-        );
-
-        const animacionEntrada = slideSiguiente.animate(
-          [
-            {
-              opacity: 0,
-              transform: `translateX(${direccion * distancia}px)`,
-            },
-            {
-              opacity: 1,
-              transform: 'translateX(0)',
-            },
-          ],
-          {
-            duration: duracion,
-            easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-            fill: 'both',
-          }
-        );
-
-        function finalizar() {
-          animacionSalida.cancel();
-          animacionEntrada.cancel();
-
-          slideAnterior.hidden = true;
-          slideAnterior.classList.remove('grafico-saliendo');
-          slideSiguiente.classList.remove('grafico-entrando');
-
-          visor.style.removeProperty('height');
-          animando = false;
-        }
-
-        Promise.all([
-          animacionSalida.finished,
-          animacionEntrada.finished,
-        ]).then(finalizar).catch(finalizar);
-      }
-
-      prev?.addEventListener('click', () => mostrar(current - 1, -1));
-      next?.addEventListener('click', () => mostrar(current + 1, 1));
-
-      dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-          mostrar(index, index > current ? 1 : -1);
-        });
-      });
-
-      // Permite deslizar entre gráficos en pantallas táctiles.
-      visor.addEventListener(
-        'touchstart',
-        (event) => {
-          touchStartX = event.changedTouches[0].screenX;
-          touchStartY = event.changedTouches[0].screenY;
-        },
-        { passive: true }
-      );
-
-      visor.addEventListener(
-        'touchend',
-        (event) => {
-          const diffX = event.changedTouches[0].screenX - touchStartX;
-          const diffY = event.changedTouches[0].screenY - touchStartY;
-
-          if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
-            const direccion = diffX < 0 ? 1 : -1;
-            mostrar(current + direccion, direccion);
-          }
-        },
-        { passive: true }
-      );
-
-      actualizarControles();
-    });
-  }
-
-  /* ==========================================
-     INICIALIZACIÓN COMPATIBLE CON ASTRO
-     ========================================== */
-
-  function iniciarInteracciones() {
-    iniciarCarruseles();
-    iniciarCarruselGraficos();
-  }
-
-  iniciarInteracciones();
-
-  document.addEventListener('astro:page-load', iniciarInteracciones);
+  document.addEventListener('astro:page-load', iniciarCarruseles);
 </script>
