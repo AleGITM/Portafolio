@@ -1,43 +1,357 @@
 
 ---
 import '../styles/global.css';
-
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
+import { ClientRouter, fade } from 'astro:transitions';
+
 interface Props {
-	title?: string;
-	description?: string;
+  title?: string;
+  description?: string;
 }
 
 const {
-	title = 'Portafolio Profesional',
-	description = 'Portafolio profesional de Ingeniería en Informática, desarrollo de software, datos y Business Intelligence.'
+  title = 'Portafolio Profesional',
+  description = 'Portafolio profesional de Ingeniería en Informática, desarrollo de software, datos y Business Intelligence.',
 } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
 
-		<meta name="description" content={description} />
-		<meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
 
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+    <title>{title}</title>
 
-		<title>{title}</title>
-	</head>
+    <!-- Navegación con transiciones de Astro -->
+    <ClientRouter />
 
-	<body class="flex min-h-screen flex-col bg-[#02030a]">
-		<Navbar />
+    <script is:inline>
+      try {
+        const temaGuardado = localStorage.getItem('portfolio-theme');
 
-		<div class="flex flex-1 flex-col">
-			<slot />
-		</div>
+        document.documentElement.classList.toggle(
+          'light',
+          temaGuardado === 'light'
+        );
+      } catch {
+        // Si localStorage no está disponible, se mantiene el modo oscuro.
+      }
+    </script>
+  </head>
 
-		<Footer />
-	</body>
+  <body class="flex min-h-screen flex-col">
+    <Navbar />
+
+    <!-- Contenido principal con transición original -->
+    <main
+      class="relative flex flex-1 flex-col"
+      transition:animate={fade({ duration: '400ms' })}
+    >
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Efecto glitch durante la navegación -->
+    <div id="glitch-overlay" aria-hidden="true">
+      <div class="glitch-band glitch-band-one"></div>
+      <div class="glitch-band glitch-band-two"></div>
+      <div class="glitch-band glitch-band-three"></div>
+    </div>
+  </body>
 </html>
+
+<style is:global>
+  /* ==========================================
+     VARIABLES DEL MODO OSCURO
+     ========================================== */
+
+  :root {
+    color-scheme: dark;
+
+    --page-bg: #02030a;
+    --surface-bg: #080b18;
+    --card-bg: #0f172a;
+
+    --text-primary: #ffffff;
+    --text-secondary: #d1d5db;
+    --text-muted: #94a3b8;
+
+    --border-color: rgba(236, 72, 153, 0.2);
+
+    --accent-pink: #ec4899;
+    --accent-cyan: #22d3ee;
+  }
+
+  /* ==========================================
+     VARIABLES DEL MODO CLARO
+     ========================================== */
+
+  html.light {
+    color-scheme: light;
+
+    --page-bg: #f8fafc;
+    --surface-bg: #ffffff;
+    --card-bg: #f1f5f9;
+
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+
+    --border-color: rgba(219, 39, 119, 0.18);
+
+    --accent-pink: #db2777;
+    --accent-cyan: #0891b2;
+  }
+
+  /* ==========================================
+     FONDO GLOBAL
+     ========================================== */
+
+  html {
+    min-height: 100%;
+    background-color: var(--page-bg);
+  }
+
+  body {
+    min-height: 100vh;
+    background-color: var(--page-bg);
+    color: var(--text-primary);
+  }
+
+  main {
+    background-color: var(--page-bg);
+  }
+
+  /* ==========================================
+     OVERLAY GLITCH ORIGINAL
+     ========================================== */
+
+  #glitch-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    overflow: hidden;
+    visibility: hidden;
+  }
+
+  .glitch-band {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 36px;
+    opacity: 0;
+    background-repeat: no-repeat;
+  }
+
+  #glitch-overlay.active {
+    visibility: visible;
+  }
+
+  #glitch-overlay.active .glitch-band-one {
+    animation: glitch-one 0.45s steps(1, end) both;
+  }
+
+  #glitch-overlay.active .glitch-band-two {
+    animation: glitch-two 0.45s steps(1, end) both;
+  }
+
+  #glitch-overlay.active .glitch-band-three {
+    animation: glitch-three 0.45s steps(1, end) both;
+  }
+
+  @keyframes glitch-one {
+    0%,
+    15%,
+    32%,
+    100% {
+      opacity: 0;
+    }
+
+    16%,
+    23% {
+      opacity: 1;
+      transform: translateX(-12px);
+    }
+
+    33%,
+    38% {
+      opacity: 0.65;
+      transform: translateX(7px);
+    }
+  }
+
+  @keyframes glitch-two {
+    0%,
+    26%,
+    45%,
+    100% {
+      opacity: 0;
+    }
+
+    27%,
+    34% {
+      opacity: 1;
+      transform: translateX(14px);
+    }
+
+    46%,
+    52% {
+      opacity: 0.5;
+      transform: translateX(-5px);
+    }
+  }
+
+  @keyframes glitch-three {
+    0%,
+    38%,
+    56%,
+    100% {
+      opacity: 0;
+    }
+
+    39%,
+    44% {
+      opacity: 0.9;
+      transform: translateX(-8px);
+    }
+
+    57%,
+    61% {
+      opacity: 0.5;
+      transform: translateX(6px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #glitch-overlay,
+    #glitch-overlay * {
+      animation: none !important;
+      visibility: hidden !important;
+    }
+  }
+</style>
+
+<script>
+  /* ==========================================
+     CONSERVAR TEMA DURANTE LA NAVEGACIÓN
+     ========================================== */
+
+  document.addEventListener('astro:before-swap', (evento) => {
+    const temaClaro = document.documentElement.classList.contains('light');
+
+    evento.newDocument.documentElement.classList.toggle(
+      'light',
+      temaClaro
+    );
+  });
+
+  /* ==========================================
+     EFECTO GLITCH DE NAVEGACIÓN
+     ========================================== */
+
+  let glitchTimeout: ReturnType<typeof setTimeout> | undefined;
+
+  function numeroAleatorio(min: number, max: number) {
+    return min + Math.random() * (max - min);
+  }
+
+  function generarBloquesAleatorios() {
+    const bandas = document.querySelectorAll<HTMLElement>(
+      '#glitch-overlay .glitch-band'
+    );
+
+    const colores = [
+      '#ec4899',
+      '#22d3ee',
+      '#f9a8d4',
+    ];
+
+    const deArribaHaciaAbajo = Math.random() < 0.5;
+
+    const alturas = [
+      numeroAleatorio(12, 30),
+      numeroAleatorio(38, 58),
+      numeroAleatorio(66, 84),
+    ];
+
+    if (!deArribaHaciaAbajo) {
+      alturas.reverse();
+    }
+
+    bandas.forEach((banda, indice) => {
+      banda.style.top = `${alturas[indice]}%`;
+
+      const capas: string[] = [];
+      const posiciones: string[] = [];
+      const tamanos: string[] = [];
+
+      const cantidad = Math.floor(numeroAleatorio(7, 11));
+
+      for (let i = 0; i < cantidad; i++) {
+        const color = colores[
+          Math.floor(Math.random() * colores.length)
+        ];
+
+        const ancho = Math.floor(numeroAleatorio(7, 19));
+        const alto = Math.floor(numeroAleatorio(7, 19));
+
+        const x = numeroAleatorio(5, 95);
+        const y = Math.floor(numeroAleatorio(0, 16));
+
+        capas.push(`linear-gradient(${color}, ${color})`);
+        posiciones.push(`${x}% ${y}px`);
+        tamanos.push(`${ancho}px ${alto}px`);
+      }
+
+      banda.style.backgroundImage = capas.join(', ');
+      banda.style.backgroundPosition = posiciones.join(', ');
+      banda.style.backgroundSize = tamanos.join(', ');
+
+      banda.style.filter =
+        'drop-shadow(0 0 4px rgba(236, 72, 153, 0.4))';
+    });
+  }
+
+  function iniciarGlitch() {
+    const overlay = document.getElementById('glitch-overlay');
+
+    if (!overlay) return;
+
+    if (
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+
+    if (glitchTimeout) {
+      clearTimeout(glitchTimeout);
+    }
+
+    overlay.classList.remove('active');
+
+    generarBloquesAleatorios();
+
+    // Reinicia la animación para cada navegación.
+    void overlay.offsetWidth;
+
+    overlay.classList.add('active');
+
+    glitchTimeout = setTimeout(() => {
+      document
+        .getElementById('glitch-overlay')
+        ?.classList.remove('active');
+    }, 450);
+  }
+
+  document.addEventListener('astro:after-swap', iniciarGlitch);
+</script>

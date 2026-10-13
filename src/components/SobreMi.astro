@@ -10,22 +10,20 @@ const lenguajes = [
 
 <section
   id="sobre-mi"
-  class="sobre-mi-section bg-[#02030a] px-6 py-20 sm:py-24"
+  class="sobre-mi-section px-6 py-20 sm:py-24"
 >
   <div class="mx-auto max-w-6xl">
 
     <!-- PRESENTACIÓN -->
     <div class="presentacion">
-      <h2 class="text-4xl font-bold text-white sm:text-5xl">
+      <h2 class="titulo-sobre-mi text-4xl font-bold sm:text-5xl">
         Sobre
-        <span
-          class="font-accent ml-2 text-pink-400 [text-shadow:0_0_20px_rgba(255,46,151,0.45)]"
-        >
+        <span class="nombre-acento font-accent ml-2">
           mí
         </span>
       </h2>
 
-      <div class="mt-8 space-y-5 text-base leading-relaxed text-gray-300 sm:text-lg">
+      <div class="descripcion-sobre-mi mt-8 space-y-5 text-base leading-relaxed sm:text-lg">
         <p>
           Soy estudiante de cuarto año de Ingeniería en Informática en AIEP,
           con interés en el desarrollo de software y las distintas áreas de
@@ -44,7 +42,7 @@ const lenguajes = [
     <div class="contenido-inferior">
 
       <div class="tecnologias-bloque">
-        <h3 class="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
+        <h3 class="titulo-tecnologias mb-5 text-sm font-semibold uppercase tracking-[0.2em]">
           Tecnologías
         </h3>
 
@@ -52,7 +50,7 @@ const lenguajes = [
           {lenguajes.map((lenguaje) => (
             <div class="tecnologia-tarjeta">
 
-              <!-- LUZ SINCRONIZADA -->
+              <!-- Luz sincronizada que recorre el borde -->
               <svg
                 class="borde-animado"
                 aria-hidden="true"
@@ -76,7 +74,7 @@ const lenguajes = [
                 class="h-10 w-10 object-contain"
               />
 
-              <span class="text-base font-medium text-gray-200">
+              <span class="nombre-tecnologia text-base font-medium">
                 {lenguaje.nombre}
               </span>
             </div>
@@ -84,7 +82,7 @@ const lenguajes = [
         </div>
       </div>
 
-      <!-- GLITCH DE CUADRADOS -->
+      <!-- Campo glitch interactivo -->
       <div
         class="glitch-campo"
         data-glitch-campo
@@ -99,13 +97,36 @@ const lenguajes = [
 </section>
 
 <style>
+  /* ==========================================
+     MODO OSCURO ORIGINAL
+     ========================================== */
+
   .sobre-mi-section {
     min-height: calc(100vh - 75px);
     overflow: hidden;
+    background: #02030a;
+    transition: background-color 0.3s ease;
   }
 
   .presentacion {
     max-width: 750px;
+  }
+
+  .titulo-sobre-mi {
+    color: #ffffff;
+  }
+
+  .nombre-acento {
+    color: #f472b6;
+    text-shadow: 0 0 20px rgba(255, 46, 151, 0.45);
+  }
+
+  .descripcion-sobre-mi {
+    color: #d1d5db;
+  }
+
+  .titulo-tecnologias {
+    color: #67e8f9;
   }
 
   .contenido-inferior {
@@ -116,7 +137,9 @@ const lenguajes = [
     margin-top: 3.5rem;
   }
 
-  /* TECNOLOGÍAS */
+  /* ==========================================
+     TARJETAS DE TECNOLOGÍAS
+     ========================================== */
 
   .tecnologias-lista {
     display: grid;
@@ -135,6 +158,10 @@ const lenguajes = [
     border-radius: 0.85rem;
     background: rgba(255, 255, 255, 0.025);
     isolation: isolate;
+
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease;
   }
 
   .tecnologia-tarjeta > img,
@@ -143,7 +170,13 @@ const lenguajes = [
     z-index: 2;
   }
 
-  /* BORDES LUMINOSOS */
+  .nombre-tecnologia {
+    color: #e5e7eb;
+  }
+
+  /* ==========================================
+     BORDES LUMINOSOS SINCRONIZADOS
+     ========================================== */
 
   .borde-animado {
     position: absolute;
@@ -162,6 +195,7 @@ const lenguajes = [
     stroke-width: 2.5;
     stroke-linecap: round;
     vector-effect: non-scaling-stroke;
+
     filter:
       drop-shadow(0 0 4px #ff2e97)
       drop-shadow(0 0 8px rgba(255, 46, 151, 0.65));
@@ -169,12 +203,15 @@ const lenguajes = [
 
   .tecnologia-tarjeta:nth-child(even) .borde-luz {
     stroke: #67e8f9;
+
     filter:
       drop-shadow(0 0 4px #22d3ee)
       drop-shadow(0 0 8px rgba(34, 211, 238, 0.65));
   }
 
-  /* CAMPO GLITCH */
+  /* ==========================================
+     CAMPO GLITCH
+     ========================================== */
 
   .glitch-campo {
     position: relative;
@@ -186,10 +223,10 @@ const lenguajes = [
     border: none;
     border-radius: 0;
 
-    /* OCULTAR COMPLETAMENTE EL CURSOR */
+    /* El cursor permanece invisible sobre el glitch */
     cursor: none;
 
-    /* PERMITIR ARRASTRAR SOBRE EL GLITCH EN MÓVIL */
+    /* Permite la interacción táctil en móvil */
     touch-action: none;
   }
 
@@ -201,7 +238,49 @@ const lenguajes = [
     pointer-events: none;
   }
 
-  /* RESPONSIVE */
+  /* ==========================================
+     MODO CLARO
+     ========================================== */
+
+  :global(html.light) .sobre-mi-section {
+    background: #f8fafc;
+  }
+
+  :global(html.light) .titulo-sobre-mi {
+    color: #0f172a;
+  }
+
+  :global(html.light) .nombre-acento {
+    color: #db2777;
+    text-shadow: 0 0 18px rgba(219, 39, 119, 0.15);
+  }
+
+  :global(html.light) .descripcion-sobre-mi {
+    color: #475569;
+  }
+
+  :global(html.light) .titulo-tecnologias {
+    color: #0891b2;
+  }
+
+  :global(html.light) .tecnologia-tarjeta {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(219, 39, 119, 0.2);
+  }
+
+  :global(html.light) .nombre-tecnologia {
+    color: #1e293b;
+  }
+
+  /*
+    Las luces rosa y cian conservan sus colores.
+    El glitch también se mantiene transparente
+    para integrarse con ambos fondos.
+  */
+
+  /* ==========================================
+     RESPONSIVE ORIGINAL
+     ========================================== */
 
   @media (max-width: 850px) {
     .contenido-inferior {
@@ -240,6 +319,11 @@ const lenguajes = [
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .sobre-mi-section,
+    .tecnologia-tarjeta {
+      transition: none;
+    }
+
     .borde-luz {
       opacity: 0.45;
     }
@@ -296,6 +380,7 @@ const lenguajes = [
     let frameId = 0;
     let destruido = false;
 
+    // Las cuatro tarjetas comparten el mismo inicio.
     const inicio = performance.now();
 
     function ajustarBordes() {
@@ -328,6 +413,7 @@ const lenguajes = [
         return;
       }
 
+      // Todas avanzan al mismo porcentaje del perímetro.
       const progreso =
         ((tiempo - inicio) % DURACION) / DURACION;
 
@@ -555,8 +641,7 @@ const lenguajes = [
 
         ultimoTiempo = tiempo;
 
-        /* RÁFAGAS DE INTERFERENCIA */
-
+        // Ráfagas de interferencia.
         if (tiempo > siguienteRafaga) {
           franjaRafaga = aleatorio(0, alto);
           desplazamientoRafaga = aleatorio(-55, 55);
@@ -574,8 +659,7 @@ const lenguajes = [
           const radio = 115;
           const cerca = mouseDentro && distancia < radio;
 
-          /* DISPERSIÓN AL ACERCAR EL MOUSE O TOCAR */
-
+          // Dispersión al acercar el mouse o tocar.
           if (cerca) {
             const fuerza = 1 - distancia / radio;
             const angulo = Math.atan2(dy, dx);
@@ -584,8 +668,7 @@ const lenguajes = [
             f.vy += Math.sin(angulo) * fuerza * 3.2 * delta;
           }
 
-          /* RETORNO AL CAMPO */
-
+          // Retorno a la posición original.
           f.vx += (f.origenX - f.x) * 0.012 * delta;
           f.vy += (f.origenY - f.y) * 0.012 * delta;
 
@@ -595,8 +678,7 @@ const lenguajes = [
           f.x += f.vx * delta;
           f.y += f.vy * delta;
 
-          /* DESAPARECER Y REGENERARSE */
-
+          // Desaparecer cerca del puntero y regenerarse.
           const distanciaOrigen = Math.hypot(
             f.origenX - mouseX,
             f.origenY - mouseY
@@ -612,8 +694,7 @@ const lenguajes = [
             (alphaObjetivo - f.alpha) *
             Math.min(suavizado * delta, 1);
 
-          /* GLITCHES INDIVIDUALES */
-
+          // Glitches individuales.
           if (Math.random() < 0.025 * delta) {
             f.x += aleatorio(-28, 28);
           }
@@ -640,7 +721,7 @@ const lenguajes = [
       }
 
       /* ==========================================
-         INTERACCIÓN MOUSE + TÁCTIL
+         INTERACCIÓN MOUSE Y TÁCTIL
          ========================================== */
 
       function actualizarPosicion(evento: PointerEvent) {
@@ -652,10 +733,6 @@ const lenguajes = [
       }
 
       function iniciarContacto(evento: PointerEvent) {
-        /*
-          En PC: basta con mover el mouse.
-          En móvil: el efecto comienza al tocar.
-        */
         if (evento.pointerType === 'mouse') {
           actualizarPosicion(evento);
           return;
@@ -666,11 +743,7 @@ const lenguajes = [
       }
 
       function moverPuntero(evento: PointerEvent) {
-        /*
-          Mouse: reacciona sin hacer clic.
-          Touch: reacciona mientras se arrastra.
-          F12 móvil: acepta los eventos touch simulados.
-        */
+        // Mouse sin clic; touch al pulsar y arrastrar.
         if (
           evento.pointerType === 'mouse' ||
           evento.buttons > 0
@@ -752,7 +825,9 @@ const lenguajes = [
     });
   }
 
-  /* INICIALIZACIÓN ASTRO */
+  /* ==========================================
+     INICIALIZACIÓN COMPATIBLE CON ASTRO
+     ========================================== */
 
   function iniciarSobreMi() {
     iniciarBordesAnimados();

@@ -1,17 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
 @import "tailwindcss";
 
-/* Tipografía de acento reutilizable */
 .font-accent {
 	font-family: 'Yellowtail', cursive;
 }
 
-/* Tarjeta del proyecto destacado */
+/* Tarjeta destacada */
 .neon-border {
 	position: relative;
 	border: 1px solid rgba(236, 72, 153, 0.18);
 	border-radius: 1rem;
 	background: #070918;
+	transition:
+		transform 250ms ease,
+		border-color 250ms ease,
+		box-shadow 250ms ease;
 }
 
 .neon-border-content {
@@ -20,7 +23,6 @@
 	border-radius: inherit;
 }
 
-/* Animación decorativa del borde */
 .neon-animation {
 	position: absolute;
 	inset: -1px;
@@ -44,8 +46,142 @@
 	filter: drop-shadow(0 0 7px rgba(236, 72, 153, 0.9));
 }
 
+/* Hover del panel y tarjetas */
+.colchagua-panel {
+	transition:
+		transform 260ms ease,
+		border-color 260ms ease,
+		box-shadow 260ms ease;
+}
+
+.grafico-carrusel {
+	max-width: 850px;
+	margin-inline: auto;
+	transition:
+		border-color 240ms ease,
+		box-shadow 240ms ease;
+}
+
+/* Gráficos compactos */
+.grafico-imagen {
+	max-width: 760px;
+	margin-inline: auto;
+}
+
+.grafico-imagen img {
+	display: block;
+	width: 100%;
+	height: auto;
+	max-height: 440px;
+	object-fit: contain;
+}
+
+/* El visor no se encoge ni se expande animadamente */
+.grafico-visor {
+	overflow: hidden;
+	transition: none;
+}
+
+.grafico-slide[hidden] {
+	display: none !important;
+}
+
+/* Controles */
+.grafico-boton,
+.colchagua-arrow,
+.colchagua-tabs button,
+.colchagua-download,
+.grafico-indicador {
+	transition:
+		transform 200ms ease,
+		color 200ms ease,
+		border-color 200ms ease,
+		background-color 200ms ease,
+		box-shadow 200ms ease,
+		text-shadow 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.neon-border:hover {
+		transform: translateY(-3px);
+		border-color: rgba(236, 72, 153, 0.5);
+		box-shadow:
+			0 10px 28px rgba(0, 0, 0, 0.2),
+			0 0 18px rgba(236, 72, 153, 0.12);
+	}
+
+	.colchagua-panel:hover {
+		transform: translateY(-3px);
+		border-top-color: rgba(236, 72, 153, 0.6);
+		box-shadow:
+			0 12px 30px rgba(0, 0, 0, 0.18),
+			0 0 20px rgba(236, 72, 153, 0.1);
+	}
+
+	.grafico-carrusel:hover {
+		border-color: rgba(236, 72, 153, 0.5);
+		box-shadow: 0 0 18px rgba(236, 72, 153, 0.12);
+	}
+
+	.grafico-boton:hover {
+		transform: translateY(-2px);
+		border-color: #ec4899;
+		color: #f9a8d4;
+		box-shadow: 0 4px 14px rgba(236, 72, 153, 0.16);
+	}
+
+	.colchagua-arrow:hover {
+		transform: translateY(-2px) scale(1.08);
+		color: #f472b6;
+		text-shadow: 0 0 12px rgba(236, 72, 153, 0.4);
+	}
+
+	.colchagua-tabs button:hover {
+		transform: translateY(-2px);
+		color: #f9a8d4;
+		text-shadow: 0 0 10px rgba(236, 72, 153, 0.2);
+	}
+
+	.colchagua-download:hover {
+		transform: translateX(3px);
+		border-color: rgba(236, 72, 153, 0.6);
+		background-color: rgba(236, 72, 153, 0.035);
+	}
+
+	.grafico-indicador:hover {
+		transform: scale(1.2);
+		background-color: #f472b6;
+	}
+
+	.grafico-boton:active,
+	.colchagua-arrow:active {
+		transform: scale(0.96);
+	}
+}
+
+@media (max-width: 639px) {
+	.grafico-carrusel {
+		max-width: 100%;
+	}
+
+	.grafico-imagen img {
+		max-height: 320px;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.neon-animation {
 		display: none;
+	}
+
+	.neon-border,
+	.colchagua-panel,
+	.grafico-carrusel,
+	.grafico-boton,
+	.colchagua-arrow,
+	.colchagua-tabs button,
+	.colchagua-download,
+	.grafico-indicador {
+		transition: none !important;
 	}
 }

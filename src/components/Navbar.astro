@@ -1,71 +1,287 @@
+
 ---
 // Enlaces a las páginas independientes del portafolio
 const navLinks = [
-	{ name: 'Inicio', href: '/' },
-	{ name: 'Sobre mí', href: '/sobre_mi' },
-	{ name: 'Proyectos', href: '/proyectos' },
+  { name: 'Inicio', href: '/' },
+  { name: 'Sobre mí', href: '/sobre_mi' },
+  { name: 'Proyectos', href: '/proyectos' },
 ];
 ---
 
-<header class="sticky top-0 z-50 border-b border-pink-500/20 bg-slate-950">
-	<nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-		<a
-			href="/"
-			class="font-accent text-2xl text-white transition-colors hover:text-pink-400"
-		>
-			Ale<span class="text-pink-500">M</span>
-		</a>
+<header class="navbar sticky top-0 z-50 border-b border-pink-500/20">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
 
-		<ul class="hidden items-center gap-8 md:flex">
-			{
-				navLinks.map((link) => (
-					<li>
-						<a
-							href={link.href}
-							class="font-accent text-xl text-gray-300 transition-colors hover:text-pink-400"
-						>
-							{link.name}
-						</a>
-					</li>
-				))
-			}
-		</ul>
+    <!-- INTERRUPTOR DE TEMA EN LUGAR DEL LOGO -->
+    <button
+      id="theme-toggle"
+      type="button"
+      class="theme-toggle"
+      aria-label="Cambiar modo de color"
+      title="Cambiar modo de color"
+    >
+      <!-- LUNA -->
+      <svg
+        class="theme-icon moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="25"
+        height="25"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M20.985 12.486A9 9 0 0 1 11.514 3.015 9 9 0 1 0 20.985 12.486Z" />
+      </svg>
 
-		<button
-			id="menu-btn"
-			type="button"
-			class="text-2xl text-white md:hidden"
-			aria-label="Abrir menú"
-			aria-expanded="false"
-			aria-controls="mobile-menu"
-		>
-			☰
-		</button>
-	</nav>
+      <!-- SOL -->
+      <svg
+        class="theme-icon sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="25"
+        height="25"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2" />
+        <path d="M12 20v2" />
+        <path d="m4.93 4.93 1.42 1.42" />
+        <path d="m17.65 17.65 1.42 1.42" />
+        <path d="M2 12h2" />
+        <path d="M20 12h2" />
+        <path d="m6.35 17.65-1.42 1.42" />
+        <path d="m19.07 4.93-1.42 1.42" />
+      </svg>
+    </button>
 
-	<ul id="mobile-menu" class="hidden space-y-4 px-6 pb-4 md:hidden">
-		{
-			navLinks.map((link) => (
-				<li>
-					<a
-						href={link.href}
-						class="font-accent block text-xl text-gray-300 transition-colors hover:text-pink-400"
-					>
-						{link.name}
-					</a>
-				</li>
-				))
-			}
-	</ul>
+    <!-- NAVEGACIÓN DE ESCRITORIO -->
+    <ul class="hidden items-center gap-8 md:flex">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="nav-link font-accent text-xl transition-colors hover:text-pink-400"
+            >
+              {link.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- BOTÓN DEL MENÚ MÓVIL -->
+    <button
+      id="menu-btn"
+      type="button"
+      class="menu-button text-2xl md:hidden"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      ☰
+    </button>
+  </nav>
+
+  <!-- MENÚ MÓVIL -->
+  <ul id="mobile-menu" class="hidden space-y-4 px-6 pb-4 md:hidden">
+    {
+      navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="nav-link font-accent block text-xl transition-colors hover:text-pink-400"
+          >
+            {link.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </header>
 
-<script>
-	const btn = document.getElementById('menu-btn');
-	const menu = document.getElementById('mobile-menu');
+<style>
+  /* NAVBAR EN MODO OSCURO */
+  .navbar {
+    background: #020617;
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease;
+  }
 
-	// Alterna el menú móvil y actualiza su estado accesible
-	btn?.addEventListener('click', () => {
-		const abierto = menu?.classList.toggle('hidden') === false;
-		btn.setAttribute('aria-expanded', String(abierto));
-	});
+  .nav-link {
+    color: #d1d5db;
+  }
+
+  .menu-button {
+    color: #ffffff;
+  }
+
+  /* BOTÓN DEL TEMA */
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgba(236, 72, 153, 0.3);
+    border-radius: 12px;
+    color: #f9a8d4;
+    background: rgba(236, 72, 153, 0.05);
+    cursor: pointer;
+    transition:
+      background 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .theme-toggle:hover {
+    background: rgba(236, 72, 153, 0.12);
+    border-color: rgba(236, 72, 153, 0.65);
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.15);
+  }
+
+  .theme-icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .sun-icon {
+    display: none;
+  }
+
+  /* ESTADO CLARO DEL NAVBAR */
+  :global(html.light) .navbar {
+    background: #f8fafc;
+    border-bottom-color: rgba(219, 39, 119, 0.2);
+  }
+
+  :global(html.light) .nav-link {
+    color: #334155;
+  }
+
+  :global(html.light) .nav-link:hover {
+    color: #db2777;
+  }
+
+  :global(html.light) .menu-button {
+    color: #0f172a;
+  }
+
+  :global(html.light) .theme-toggle {
+    color: #db2777;
+    background: rgba(219, 39, 119, 0.06);
+  }
+
+  :global(html.light) .moon-icon {
+    display: none;
+  }
+
+  :global(html.light) .sun-icon {
+    display: block;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .navbar,
+    .theme-toggle {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  /* ==========================================
+     MENÚ MÓVIL
+     ========================================== */
+
+  function inicializarMenuMovil() {
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+
+    if (!btn || !menu) return;
+
+    if (btn.dataset.inicializado === 'true') return;
+    btn.dataset.inicializado = 'true';
+
+    btn.addEventListener('click', () => {
+      const abierto = !menu.classList.contains('hidden');
+
+      menu.classList.toggle('hidden', abierto);
+
+      btn.setAttribute('aria-expanded', String(!abierto));
+      btn.setAttribute(
+        'aria-label',
+        abierto ? 'Abrir menú' : 'Cerrar menú'
+      );
+    });
+  }
+
+  /* ==========================================
+     INTERRUPTOR OSCURO / CLARO
+     ========================================== */
+
+  function aplicarTemaGuardado() {
+    const tema = localStorage.getItem('portfolio-theme');
+
+    document.documentElement.classList.toggle(
+      'light',
+      tema === 'light'
+    );
+  }
+
+  function inicializarTema() {
+    aplicarTemaGuardado();
+
+    const boton = document.getElementById('theme-toggle');
+
+    if (!boton) return;
+
+    if (boton.dataset.inicializado === 'true') return;
+    boton.dataset.inicializado = 'true';
+
+    function actualizarAccesibilidad() {
+      const claro = document.documentElement.classList.contains('light');
+
+      boton!.setAttribute(
+        'aria-label',
+        claro ? 'Activar modo oscuro' : 'Activar modo claro'
+      );
+
+      boton!.setAttribute(
+        'title',
+        claro ? 'Activar modo oscuro' : 'Activar modo claro'
+      );
+    }
+
+    actualizarAccesibilidad();
+
+    boton.addEventListener('click', () => {
+      const claro = document.documentElement.classList.toggle('light');
+
+      localStorage.setItem(
+        'portfolio-theme',
+        claro ? 'light' : 'dark'
+      );
+
+      actualizarAccesibilidad();
+    });
+  }
+
+  /* INICIALIZACIÓN COMPATIBLE CON CLIENTROUTER */
+  function inicializarNavbar() {
+    inicializarMenuMovil();
+    inicializarTema();
+  }
+
+  inicializarNavbar();
+
+  document.addEventListener('astro:page-load', inicializarNavbar);
 </script>
