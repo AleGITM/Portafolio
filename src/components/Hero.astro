@@ -1,138 +1,136 @@
-
 <section
-	id="inicio"
-	class="hero-section relative flex min-h-[calc(100vh-65px)] items-center overflow-hidden px-6"
+    id="inicio"
+    class="hero-section relative flex min-h-[calc(100vh-65px)] items-center overflow-hidden px-6"
 >
-	<div class="relative z-10 mx-auto w-full max-w-6xl py-20">
+    <div class="relative z-10 mx-auto w-full max-w-6xl py-20">
 
-		<!-- Etiqueta superior -->
-		<p class="hero-entrada hero-etiqueta mb-4 text-sm font-medium uppercase tracking-[0.25em]">
-			Portafolio personal
-		</p>
+        <!-- Etiqueta superior -->
+        <p class="hero-entrada hero-etiqueta mb-4 text-sm font-medium uppercase tracking-[0.25em]">
+            Portafolio personal
+        </p>
 
-		<!-- Presentación principal -->
-		<h1 class="hero-heading max-w-5xl text-4xl font-bold leading-tight sm:text-5xl lg:text-7xl">
-			<span class="hero-entrada hero-titulo block">
-				Hola, soy
-				<span class="hero-nombre font-accent ml-3 inline-block">
-					Ale.
-				</span>
-			</span>
+        <!-- Presentación principal -->
+        <h1 class="hero-heading max-w-5xl text-4xl font-bold leading-tight sm:text-5xl lg:text-7xl">
+            <span class="hero-entrada hero-titulo block">
+                Hola, soy
+                <span class="hero-nombre font-accent ml-3 inline-block">
+                    Ale.
+                </span>
+            </span>
 
-			<span class="hero-entrada hero-subtitulo mt-2 block">
-				Estudiante de Ingeniería en Informática.
-			</span>
-		</h1>
+            <span class="hero-entrada hero-subtitulo mt-2 block">
+                Estudiante de Ingeniería en Informática.
+            </span>
+        </h1>
 
-		<!-- Descripción -->
-		<p class="hero-entrada hero-descripcion mt-6 max-w-2xl text-base leading-relaxed sm:text-lg">
-			Interesado en el desarrollo de software y la tecnología.
-		</p>
+        <!-- Descripción -->
+        <p class="hero-entrada hero-descripcion mt-6 max-w-2xl text-base leading-relaxed sm:text-lg">
+            Interesado en el desarrollo de software y la tecnología.
+        </p>
 
-	</div>
+    </div>
 </section>
 
 <style>
-	/* ==========================================
-	   MODO OSCURO: DISEÑO ORIGINAL
-	   ========================================== */
+    /* ==========================================
+       MODO OSCURO: DISEÑO ORIGINAL
+       ========================================== */
 
-	.hero-section {
-		background: linear-gradient(
-			to bottom right,
-			#050817,
-			#090b20,
-			#02030a
-		);
-		transition: background 0.3s ease;
-	}
+    .hero-section {
+        background: linear-gradient(
+            to bottom right,
+            #050817,
+            #090b20,
+            #02030a
+        );
+    }
 
-	.hero-etiqueta {
-		color: #f472b6;
-	}
+    .hero-etiqueta {
+        color: #f472b6;
+    }
 
-	.hero-heading {
-		color: #ffffff;
-	}
+    .hero-heading {
+        color: #ffffff;
+    }
 
-	.hero-nombre {
-		color: #f472b6;
-		text-shadow: 0 0 24px rgba(255, 46, 151, 0.55);
-	}
+    .hero-nombre {
+        color: #f472b6;
+        text-shadow: 0 0 24px rgba(255, 46, 151, 0.55);
+    }
 
-	.hero-descripcion {
-		color: #d1d5db;
-	}
+    .hero-descripcion {
+        color: #d1d5db;
+    }
 
-	/* ==========================================
-	   MODO CLARO
-	   ========================================== */
+    /* ==========================================
+       MODO CLARO
+       ========================================== */
 
-	:global(html.light) .hero-section {
-		background: linear-gradient(
-			to bottom right,
-			#f8fafc,
-			#f1f5f9,
-			#ffffff
-		);
-	}
+    :global(html.light) .hero-section {
+        background: linear-gradient(
+            to bottom right,
+            #f8fafc,
+            #f1f5f9,
+            #ffffff
+        );
+    }
 
-	:global(html.light) .hero-etiqueta {
-		color: #db2777;
-	}
+    :global(html.light) .hero-etiqueta {
+        color: #db2777;
+    }
 
-	:global(html.light) .hero-heading {
-		color: #0f172a;
-	}
+    :global(html.light) .hero-heading {
+        color: #0f172a;
+    }
 
-	:global(html.light) .hero-nombre {
-		color: #db2777;
-		text-shadow: 0 0 18px rgba(219, 39, 119, 0.15);
-	}
+    :global(html.light) .hero-nombre {
+        color: #db2777;
+        text-shadow: 0 0 18px rgba(219, 39, 119, 0.15);
+    }
 
-	:global(html.light) .hero-descripcion {
-		color: #475569;
-	}
+    :global(html.light) .hero-descripcion {
+        color: #475569;
+    }
 
-	/* ==========================================
-	   ANIMACIONES ORIGINALES
-	   ========================================== */
+    /* ==========================================
+       ANIMACIONES ORIGINALES
+       ========================================== */
 
-	@keyframes aparecerHero {
-		from {
-			opacity: 0;
-			transform: translateY(18px);
-		}
+    @keyframes aparecerHero {
+        from {
+            opacity: 0;
+            transform: translateY(18px);
+        }
 
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
-	.hero-entrada {
-		animation: aparecerHero 700ms ease-out both;
-	}
+    .hero-entrada {
+        animation: aparecerHero 700ms ease-out both;
+    }
 
-	.hero-etiqueta {
-		animation-delay: 80ms;
-	}
+    .hero-etiqueta {
+        animation-delay: 80ms;
+    }
 
-	.hero-titulo {
-		animation-delay: 200ms;
-	}
+    .hero-titulo {
+        animation-delay: 200ms;
+    }
 
-	.hero-subtitulo {
-		animation-delay: 350ms;
-	}
+    .hero-subtitulo {
+        animation-delay: 350ms;
+    }
 
-	.hero-descripcion {
-		animation-delay: 500ms;
-	}
+    .hero-descripcion {
+        animation-delay: 500ms;
+    }
 
-	@media (prefers-reduced-motion: reduce) {
-		.hero-entrada {
-			animation: none;
-		}
-	}
+    @media (prefers-reduced-motion: reduce) {
+        .hero-entrada {
+            animation: none;
+        }
+    }
 </style>

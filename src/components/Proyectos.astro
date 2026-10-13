@@ -1,4 +1,3 @@
-
 ---
 const fuentes = [
   { nombre: 'SII', detalle: 'Actividad económica por comuna, 2005–2024.' },
@@ -9,10 +8,12 @@ const fuentes = [
 ];
 
 const archivos = {
-  notebook: '/archivos/colchagua.ipynb',
-  datasets: '/archivos/datasets-colchagua.zip',
-  powerbi: '/archivos/colchagua.pbix',
-  informe: '/archivos/informe-colchagua.pdf',
+  datasets: '/archivos/Datasets.zip',
+  notebooks: '/archivos/Notebooks.zip',
+  exploratorio: '/archivos/Analisis_Exploratorio.ipynb',
+  ml: '/archivos/ML_SEGMENTACION.ipynb',
+  forecast: '/archivos/FORECAST.ipynb',
+  powerbi: '/archivos/DashboardColch.pbix',
 };
 
 const cifras = [
@@ -136,7 +137,7 @@ const etapas = [
             </div>
 
             <div class="colchagua-downloads">
-              <h4 class="colchagua-subheading">Archivos de esta etapa</h4>
+              <h4 class="colchagua-subheading">Archivos de investigación</h4>
 
               <a class="colchagua-download" href={archivos.datasets} download>
                 <span class="colchagua-extension">.zip</span>
@@ -147,11 +148,11 @@ const etapas = [
                 <span aria-hidden="true">↗</span>
               </a>
 
-              <a class="colchagua-download" href={archivos.notebook} download>
-                <span class="colchagua-extension">.ipynb</span>
+              <a class="colchagua-download" href={archivos.notebooks} download>
+                <span class="colchagua-extension">.zip</span>
                 <span>
-                  <strong>Notebook de investigación</strong>
-                  <small>Preparación de datos y análisis</small>
+                  <strong>Notebooks del proyecto</strong>
+                  <small>Conjunto de cuadernos de investigación</small>
                 </span>
                 <span aria-hidden="true">↗</span>
               </a>
@@ -177,9 +178,7 @@ const etapas = [
               de los datos antes de desarrollar los modelos analíticos.
             </p>
 
-            <h4 class="colchagua-subheading">
-              Aspectos investigados
-            </h4>
+            <h4 class="colchagua-subheading">Aspectos investigados</h4>
 
             <div class="analisis-lista">
               <div class="analisis-fila">
@@ -220,14 +219,14 @@ const etapas = [
 
             <p class="colchagua-nota">
               El análisis detallado, el código y las visualizaciones
-              originales se encuentran en el notebook de investigación.
+              originales se encuentran en el notebook de análisis exploratorio.
             </p>
 
             <div class="colchagua-downloads">
-              <a class="colchagua-download" href={archivos.notebook} download>
+              <a class="colchagua-download" href={archivos.exploratorio} download>
                 <span class="colchagua-extension">.ipynb</span>
                 <span>
-                  <strong>Consultar análisis completo</strong>
+                  <strong>Descargar análisis exploratorio</strong>
                   <small>Notebook con código y visualizaciones</small>
                 </span>
                 <span aria-hidden="true">↗</span>
@@ -292,11 +291,11 @@ const etapas = [
             </div>
 
             <div class="colchagua-downloads">
-              <a class="colchagua-download" href={archivos.notebook} download>
+              <a class="colchagua-download" href={archivos.ml} download>
                 <span class="colchagua-extension">.ipynb</span>
                 <span>
-                  <strong>Consultar modelo completo</strong>
-                  <small>Clustering y evaluación</small>
+                  <strong>Descargar modelo Machine Learning</strong>
+                  <small>Clustering y evaluación de resultados</small>
                 </span>
                 <span aria-hidden="true">↗</span>
               </a>
@@ -361,10 +360,10 @@ const etapas = [
             </div>
 
             <div class="colchagua-downloads">
-              <a class="colchagua-download" href={archivos.notebook} download>
+              <a class="colchagua-download" href={archivos.forecast} download>
                 <span class="colchagua-extension">.ipynb</span>
                 <span>
-                  <strong>Consultar pronóstico completo</strong>
+                  <strong>Descargar pronóstico completo</strong>
                   <small>Modelos y evaluación</small>
                 </span>
                 <span aria-hidden="true">↗</span>
@@ -381,67 +380,23 @@ const etapas = [
             hidden
           >
             <p class="colchagua-kicker">05 / Visualización y resultados</p>
-            <h3 class="colchagua-heading">Power BI y conclusiones</h3>
+            <h3 class="colchagua-heading">Power BI</h3>
 
             <p class="colchagua-copy">
-              Como parte de la presentación del proyecto, se utiliza
-              Power BI para organizar y visualizar los indicadores
-              económicos, agrícolas y ambientales de Colchagua,
-              facilitando su interpretación y comparación territorial.
+              Se desarrolló un dashboard en Power BI Desktop para
+              visualizar los indicadores económicos, agrícolas y
+              ambientales de Colchagua, facilitando su interpretación
+              y comparación territorial.
             </p>
 
-            <!-- ESPACIO PARA EL DASHBOARD DEFINITIVO -->
-            <div class="dashboard-pendiente">
-              <span class="dashboard-icono" aria-hidden="true">▤</span>
-              <h4>Dashboard de Power BI</h4>
-              <p>
-                La visualización interactiva se incorporará
-                cuando esté lista la versión definitiva.
-              </p>
-            </div>
-
-            <h4 class="colchagua-subheading">Principales conclusiones</h4>
-
-            <div class="conclusiones-lista">
-              <p>
-                <span>01</span>
-                San Fernando registra la mayor frecuencia histórica
-                de incendios, mientras que Pumanque presenta la mayor
-                superficie quemada.
-              </p>
-
-              <p>
-                <span>02</span>
-                Las comunas presentan perfiles agrícolas y ambientales
-                diferentes, por lo que no es adecuado evaluarlas
-                mediante un único indicador.
-              </p>
-
-              <p>
-                <span>03</span>
-                Los resultados sirven como base descriptiva para apoyar
-                decisiones territoriales, pero no demuestran causalidad
-                ni cuantifican directamente pérdidas económicas de las PYMEs.
-              </p>
-            </div>
-
             <div class="colchagua-downloads">
-              <h4 class="colchagua-subheading">Archivos del proyecto</h4>
+              <h4 class="colchagua-subheading">Archivo del dashboard</h4>
 
               <a class="colchagua-download" href={archivos.powerbi} download>
                 <span class="colchagua-extension">.pbix</span>
                 <span>
-                  <strong>Dashboard Power BI</strong>
+                  <strong>Descargar dashboard Power BI</strong>
                   <small>Archivo para Power BI Desktop</small>
-                </span>
-                <span aria-hidden="true">↗</span>
-              </a>
-
-              <a class="colchagua-download" href={archivos.informe} download>
-                <span class="colchagua-extension">.pdf</span>
-                <span>
-                  <strong>Informe de investigación</strong>
-                  <small>Metodología y resultados completos</small>
                 </span>
                 <span aria-hidden="true">↗</span>
               </a>
@@ -516,19 +471,13 @@ const etapas = [
 </section>
 
 <style>
-  /* ==========================================
-     FONDO GENERAL
-     ========================================== */
-
+  /* FONDO GENERAL */
   .proyectos-section {
     background: #050817;
     transition: background-color 300ms ease;
   }
 
-  /* ==========================================
-     PANEL PRINCIPAL
-     ========================================== */
-
+  /* PANEL PRINCIPAL */
   .colchagua-panel {
     position: relative;
     isolation: isolate;
@@ -585,10 +534,7 @@ const etapas = [
     }
   }
 
-  /* ==========================================
-     PESTAÑAS
-     ========================================== */
-
+  /* PESTAÑAS */
   .colchagua-tabs {
     display: flex;
     flex-wrap: wrap;
@@ -666,10 +612,7 @@ const etapas = [
     font-weight: 600;
   }
 
-  /* ==========================================
-     FUENTES DE DATOS
-     ========================================== */
-
+  /* FUENTES DE DATOS */
   .fuentes-lista {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -697,10 +640,7 @@ const etapas = [
     line-height: 1.6;
   }
 
-  /* ==========================================
-     ANÁLISIS EXPLORATORIO
-     ========================================== */
-
+  /* ANÁLISIS EXPLORATORIO Y PERFILES */
   .analisis-lista,
   .perfiles-lista {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -745,10 +685,7 @@ const etapas = [
     line-height: 1.8;
   }
 
-  /* ==========================================
-     FORECAST
-     ========================================== */
-
+  /* FORECAST */
   .modelos-tabla {
     max-width: 48rem;
     overflow-x: auto;
@@ -813,72 +750,7 @@ const etapas = [
     line-height: 1.7;
   }
 
-  /* ==========================================
-     POWER BI
-     ========================================== */
-
-  .dashboard-pendiente {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    min-height: 220px;
-    margin-top: 2rem;
-    padding: 2rem;
-    border: 1px dashed rgba(103, 232, 249, 0.25);
-    background: #080e20;
-    text-align: center;
-  }
-
-  .dashboard-icono {
-    color: #67e8f9;
-    font-size: 2rem;
-    line-height: 1;
-  }
-
-  .dashboard-pendiente h4 {
-    color: #fff;
-    font-size: 1.05rem;
-    font-weight: 600;
-  }
-
-  .dashboard-pendiente p {
-    max-width: 28rem;
-    color: #94a3b8;
-    font-size: 0.875rem;
-    line-height: 1.7;
-  }
-
-  /* ==========================================
-     CONCLUSIONES
-     ========================================== */
-
-  .conclusiones-lista {
-    max-width: 56rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .conclusiones-lista p {
-    display: flex;
-    gap: 1rem;
-    padding: 1.1rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    color: #d1d5db;
-    font-size: 0.9rem;
-    line-height: 1.8;
-  }
-
-  .conclusiones-lista span {
-    flex-shrink: 0;
-    color: #f472b6;
-    font-family: monospace;
-  }
-
-  /* ==========================================
-     CIFRAS
-     ========================================== */
-
+  /* CIFRAS */
   .cifras-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -915,10 +787,7 @@ const etapas = [
     color: #fff;
   }
 
-  /* ==========================================
-     DESCARGAS
-     ========================================== */
-
+  /* DESCARGAS */
   .colchagua-downloads {
     margin-top: 2.5rem;
     max-width: 48rem;
@@ -965,10 +834,7 @@ const etapas = [
     color: #67e8f9;
   }
 
-  /* ==========================================
-     CONTROLES DEL PANEL
-     ========================================== */
-
+  /* CONTROLES */
   .colchagua-controls {
     display: flex;
     align-items: center;
@@ -993,10 +859,7 @@ const etapas = [
     display: none !important;
   }
 
-  /* ==========================================
-     HOVER Y BORDE NEÓN
-     ========================================== */
-
+  /* HOVER Y BORDE NEÓN */
   @media (hover: hover) and (pointer: fine) {
     .colchagua-panel:hover {
       transform: none !important;
@@ -1032,10 +895,7 @@ const etapas = [
     }
   }
 
-  /* ==========================================
-     RESPONSIVE
-     ========================================== */
-
+  /* RESPONSIVE */
   @media (min-width: 640px) {
     .colchagua-tabs {
       padding-right: 2.5rem;
@@ -1073,11 +933,6 @@ const etapas = [
     .colchagua-extension {
       width: 3rem;
     }
-
-    .dashboard-pendiente {
-      min-height: 190px;
-      padding: 1.5rem;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -1093,15 +948,11 @@ const etapas = [
     }
   }
 
-  /* ==========================================
-     MODO CLARO
-     ========================================== */
-
+  /* MODO CLARO */
   :global(html.light) .proyectos-section {
     background: #f8fafc;
   }
 
-  /* Títulos y textos generales */
   :global(html.light) .proyectos-section .text-white {
     color: #0f172a;
   }
@@ -1123,7 +974,6 @@ const etapas = [
     color: #0891b2;
   }
 
-  /* Panel principal */
   :global(html.light) .colchagua-panel {
     background: #ffffff;
     border-top-color: rgba(8, 145, 178, 0.3);
@@ -1144,7 +994,6 @@ const etapas = [
       ) border-box;
   }
 
-  /* Pestañas */
   :global(html.light) .colchagua-tabs {
     border-bottom-color: rgba(15, 23, 42, 0.12);
   }
@@ -1166,7 +1015,6 @@ const etapas = [
     background: #db2777;
   }
 
-  /* Contenido */
   :global(html.light) .colchagua-kicker,
   :global(html.light) .fuente-nombre {
     color: #0891b2;
@@ -1185,7 +1033,6 @@ const etapas = [
     color: #be185d;
   }
 
-  /* Fuentes y análisis */
   :global(html.light) .fuentes-lista,
   :global(html.light) .fuente-fila + .fuente-fila,
   :global(html.light) .analisis-lista,
@@ -1211,7 +1058,6 @@ const etapas = [
     color: #64748b;
   }
 
-  /* Forecast */
   :global(html.light) .modelos-tabla,
   :global(html.light) .modelos-tabla th,
   :global(html.light) .modelos-tabla tbody tr {
@@ -1246,39 +1092,6 @@ const etapas = [
     color: #64748b;
   }
 
-  /* Power BI */
-  :global(html.light) .dashboard-pendiente {
-    background: #f8fafc;
-    border-color: rgba(8, 145, 178, 0.3);
-  }
-
-  :global(html.light) .dashboard-icono {
-    color: #0891b2;
-  }
-
-  :global(html.light) .dashboard-pendiente h4 {
-    color: #0f172a;
-  }
-
-  :global(html.light) .dashboard-pendiente p {
-    color: #64748b;
-  }
-
-  /* Conclusiones */
-  :global(html.light) .conclusiones-lista,
-  :global(html.light) .conclusiones-lista p {
-    border-color: rgba(15, 23, 42, 0.12);
-  }
-
-  :global(html.light) .conclusiones-lista p {
-    color: #475569;
-  }
-
-  :global(html.light) .conclusiones-lista span {
-    color: #db2777;
-  }
-
-  /* Cifras */
   :global(html.light) .cifras-grid {
     border-top-color: rgba(8, 145, 178, 0.3);
     border-bottom-color: rgba(15, 23, 42, 0.12);
@@ -1300,7 +1113,6 @@ const etapas = [
     color: #0f172a;
   }
 
-  /* Descargas */
   :global(html.light) .colchagua-download {
     color: #0f172a;
     border-bottom-color: rgba(15, 23, 42, 0.12);
@@ -1318,7 +1130,6 @@ const etapas = [
     color: #0891b2;
   }
 
-  /* Flechas y contador */
   :global(html.light) .colchagua-controls {
     border-top-color: rgba(15, 23, 42, 0.12);
   }
@@ -1327,7 +1138,6 @@ const etapas = [
     color: #475569;
   }
 
-  /* Hover en modo claro */
   @media (hover: hover) and (pointer: fine) {
     :global(html.light) .colchagua-tabs button:hover,
     :global(html.light) .colchagua-arrow:hover {
@@ -1341,10 +1151,6 @@ const etapas = [
 </style>
 
 <script>
-  /* ==========================================
-     NAVEGACIÓN ENTRE LAS CINCO ETAPAS
-     ========================================== */
-
   function iniciarCarruseles() {
     document.querySelectorAll<HTMLElement>('[data-tabs-root]').forEach((root) => {
       if (root.dataset.initialized === 'true') return;
